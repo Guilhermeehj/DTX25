@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>DTX25 - IA Automatizada</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 700px; margin: 20px auto; background: #f4f4f4; padding: 20px; }
+    h1 { color: #222; }
+    #log { border: 1px solid #ccc; padding: 10px; height: 200px; overflow-y: auto; background: #fff; }
+    button { padding: 10px 20px; font-size: 16px; margin-top: 10px; background: #004aad; color: white; border: none; cursor: pointer; }
+    button:hover { background: #00337f; }
+    .video-item { margin-bottom: 10px; padding: 10px; background: #e8f1ff; border-radius: 4px; }
+  </style>
+</head>
+<body>
+  <h1>DTX25 - IA Automatizada</h1>
+
+  <button id="startBtn">Iniciar Simulação Automática</button>
+
+  <h2>Logs:</h2>
+  <div id="log"></div>
+
+  <h2>Vídeos Criados:</h2>
+  <div id="videosList"></div>
+
+  <script>
+    function minerarProduto() {
+      const produtos = [
+        {nome: "Fone Bluetooth X", preco: "R$79,90", link: "https://shopee.com.br/produto1?aff_id=18318200579"},
+        {nome: "Relógio Inteligente Y", preco: "R$159,90", link: "https://shopee.com.br/produto2?aff_id=18318200579"},
+        {nome: "Carregador Portátil Z", preco: "R$49,90", link: "https://shopee.com.br/produto3?aff_id=18318200579"},
+      ];
+      const escolha = produtos[Math.floor(Math.random() * produtos.length)];
+      return escolha;
+    }
+
+    function gerarTexto(produto) {
+      return `Conheça o incrível ${produto.nome}, disponível por apenas ${produto.preco}! Aproveite essa oferta exclusiva na Shopee, clicando no link: ${produto.link}`;
+    }
+
+    function falarTexto(texto) {
+      if (!('speechSynthesis' in window)) return;
+      const utterance = new SpeechSynthesisUtterance(texto);
+      utterance.lang = 'pt-BR';
+      utterance.rate = 1;
+      speechSynthesis.speak(utterance);
+    }
+
+    function postarVideo(video) {
+      const div = document.createElement('div');
+      div.className = 'video-item';
+      div.textContent = `Vídeo Informativo: "${video.texto}" - Postado às ${video.data.toLocaleTimeString()}`;
+      document.getElementById('videosList').prepend(div);
+    }
+
+    async function processoAutomatizado() {
+      log("Iniciando processo automatizado...");
+      const produto = minerarProduto();
+      log(`Produto minerado: ${produto.nome} por ${produto.preco}`);
+
+      const texto = gerarTexto(produto);
+      log(`Texto gerado: "${texto}"`);
+
+      log("Gerando vídeo (simulado)...");
+      await new Promise(r => setTimeout(r, 2000));
+
+      falarTexto(texto);
+      log("Voz sintetizada iniciada.");
+
+      const video = { texto, data: new Date() };
+      postarVideo(video);
+      log("Vídeo postado automaticamente (simulado).");
+
+      log("Processo finalizado.");
+    }
+
+    function log(msg) {
+      const logDiv = document.getElementById('log');
+      const now = new Date().toLocaleTimeString();
+      logDiv.innerHTML += `[${now}] ${msg}<br>`;
+      logDiv.scrollTop = logDiv.scrollHeight;
+    }
+
+    document.getElementById('startBtn').addEventListener('click', () => {
+      processoAutomatizado();
+    });
+  </script>
+</body>
+</html>
