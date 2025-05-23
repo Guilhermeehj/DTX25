@@ -1,30 +1,146 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <title>Bloco Coração</title>
+  <title>Bonequinho Fofo</title>
   <style>
-    .love .block.heart {
-      width: 40px;
-      height: 40px;
-      position: absolute;
-      background: url("heart.png") no-repeat center;
-      background-size: contain;
-      /* border: 1px solid; */ /* Descomente se quiser borda */
-      box-sizing: border-box;
+    body {
+      margin: 0;
+      background: #ffe6f0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-family: 'Arial', sans-serif;
     }
 
-    .love {
+    .scene {
       position: relative;
-      width: 100vw;
-      height: 100vh;
-      background-color: #fff;
+      width: 200px;
+      height: 300px;
+    }
+
+    .head {
+      width: 80px;
+      height: 80px;
+      background: #fff;
+      border-radius: 50%;
+      border: 2px solid #555;
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .eye {
+      width: 10px;
+      height: 10px;
+      background: #333;
+      border-radius: 50%;
+      position: absolute;
+      top: 25px;
+    }
+
+    .eye.left {
+      left: 20px;
+    }
+
+    .eye.right {
+      right: 20px;
+    }
+
+    .body {
+      width: 60px;
+      height: 100px;
+      background: #fcd;
+      position: absolute;
+      top: 80px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 20px;
+      border: 2px solid #555;
+    }
+
+    .arm {
+      width: 30px;
+      height: 60px;
+      background: #fcd;
+      position: absolute;
+      top: 80px;
+      border-radius: 20px;
+      border: 2px solid #555;
+      transform-origin: top;
+    }
+
+    .arm.left {
+      left: 5px;
+      transform: rotate(45deg);
+    }
+
+    .arm.right {
+      right: 5px;
+      transform: rotate(-45deg);
+    }
+
+    .heart {
+      width: 30px;
+      height: 30px;
+      background: red;
+      position: absolute;
+      top: 120px;
+      left: 50%;
+      transform: translateX(-50%) rotate(45deg);
+      animation: pulse 1s infinite;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: "";
+      width: 30px;
+      height: 30px;
+      background: red;
+      position: absolute;
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -15px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: -15px;
+      top: 0;
+    }
+
+    @keyframes pulse {
+      0% { transform: translateX(-50%) rotate(45deg) scale(1); }
+      50% { transform: translateX(-50%) rotate(45deg) scale(1.2); }
+      100% { transform: translateX(-50%) rotate(45deg) scale(1); }
+    }
+
+    .msg {
+      position: absolute;
+      bottom: -40px;
+      width: 100%;
+      text-align: center;
+      font-size: 18px;
+      color: #d13c6e;
+      font-weight: bold;
     }
   </style>
 </head>
 <body>
-  <div class="love">
-    <div class="block heart" style="top: 100px; left: 100px;"></div>
+  <div class="scene">
+    <div class="head">
+      <div class="eye left"></div>
+      <div class="eye right"></div>
+    </div>
+    <div class="body"></div>
+    <div class="arm left"></div>
+    <div class="arm right"></div>
+    <div class="heart"></div>
+    <div class="msg">Para você, meu amor!</div>
   </div>
 </body>
 </html>
