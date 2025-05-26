@@ -2,145 +2,106 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <title>Bonequinho Fofo</title>
+  <title>Ovelhinha para Lorrani</title>
   <style>
     body {
       margin: 0;
-      background: #ffe6f0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      background: #fff0f5;
       height: 100vh;
+      overflow: hidden;
       font-family: 'Arial', sans-serif;
-    }
-
-    .scene {
       position: relative;
-      width: 200px;
-      height: 300px;
     }
 
-    .head {
-      width: 80px;
-      height: 80px;
+    .text {
+      position: absolute;
+      bottom: 30px;
+      width: 100%;
+      text-align: center;
+      font-size: 28px;
+      font-weight: bold;
+      color: #d13c6e;
+    }
+
+    .sheep {
+      position: absolute;
+      bottom: 100px;
+      left: -150px;
+      width: 120px;
+      animation: walk 5s ease-in-out forwards, jump 1s ease-in-out 5s infinite alternate;
+      cursor: pointer;
+    }
+
+    .sheep .head {
+      width: 100px;
+      height: 60px;
       background: #fff;
-      border-radius: 50%;
-      border: 2px solid #555;
+      border: 4px dotted #ccc;
+      border-radius: 50% 50% 40% 40%;
       position: absolute;
       top: 0;
-      left: 50%;
-      transform: translateX(-50%);
+      left: 10px;
     }
 
-    .eye {
-      width: 10px;
-      height: 10px;
-      background: #333;
+    .sheep .eye {
+      width: 8px;
+      height: 8px;
+      background: #000;
       border-radius: 50%;
       position: absolute;
-      top: 25px;
+      top: 20px;
     }
 
-    .eye.left {
-      left: 20px;
-    }
+    .sheep .eye.left { left: 25px; }
+    .sheep .eye.right { right: 25px; }
 
-    .eye.right {
-      right: 20px;
-    }
-
-    .body {
-      width: 60px;
-      height: 100px;
-      background: #fcd;
-      position: absolute;
-      top: 80px;
-      left: 50%;
-      transform: translateX(-50%);
-      border-radius: 20px;
-      border: 2px solid #555;
-    }
-
-    .arm {
-      width: 30px;
-      height: 60px;
-      background: #fcd;
-      position: absolute;
-      top: 80px;
-      border-radius: 20px;
-      border: 2px solid #555;
-      transform-origin: top;
-    }
-
-    .arm.left {
-      left: 5px;
-      transform: rotate(45deg);
-    }
-
-    .arm.right {
-      right: 5px;
-      transform: rotate(-45deg);
-    }
-
-    .heart {
-      width: 30px;
-      height: 30px;
-      background: red;
-      position: absolute;
-      top: 120px;
-      left: 50%;
-      transform: translateX(-50%) rotate(45deg);
-      animation: pulse 1s infinite;
-    }
-
-    .heart::before,
-    .heart::after {
-      content: "";
-      width: 30px;
-      height: 30px;
-      background: red;
-      position: absolute;
+    .sheep .body {
+      width: 120px;
+      height: 120px;
+      background: #fff;
+      border: 4px dotted #ccc;
       border-radius: 50%;
-    }
-
-    .heart::before {
-      top: -15px;
+      position: absolute;
+      top: 50px;
       left: 0;
     }
 
-    .heart::after {
-      left: -15px;
-      top: 0;
+    @keyframes walk {
+      0% { left: -150px; }
+      100% { left: 50%; transform: translateX(-50%); }
     }
 
-    @keyframes pulse {
-      0% { transform: translateX(-50%) rotate(45deg) scale(1); }
-      50% { transform: translateX(-50%) rotate(45deg) scale(1.2); }
-      100% { transform: translateX(-50%) rotate(45deg) scale(1); }
-    }
-
-    .msg {
-      position: absolute;
-      bottom: -40px;
-      width: 100%;
-      text-align: center;
-      font-size: 18px;
-      color: #d13c6e;
-      font-weight: bold;
+    @keyframes jump {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-20px); }
     }
   </style>
 </head>
 <body>
-  <div class="scene">
-    <div class="head">
-      <div class="eye left"></div>
-      <div class="eye right"></div>
-    </div>
-    <div class="body"></div>
-    <div class="arm left"></div>
-    <div class="arm right"></div>
-    <div class="heart"></div>
-    <div class="msg">Para você, meu amor!</div>
+
+<div class="sheep" onclick="playSound()">
+  <div class="head">
+    <div class="eye left"></div>
+    <div class="eye right"></div>
   </div>
+  <div class="body"></div>
+</div>
+
+<div class="text">Te amo Lorrani</div>
+
+<audio id="baa" src="https://www.soundjay.com/animal/sheep-bleating-01.mp3" preload="auto"></audio>
+
+<script>
+  function playSound() {
+    const sound = document.getElementById('baa');
+    sound.play();
+  }
+
+  // Toca automaticamente ao parar de andar
+  setTimeout(() => {
+    playSound();
+  }, 5200); // após andar 5s
+</script>
+
 </body>
 </html>
