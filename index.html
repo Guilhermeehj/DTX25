@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
@@ -94,13 +94,14 @@
 <script>
   function playSound() {
     const sound = document.getElementById('baa');
+    sound.currentTime = 0;
     sound.play();
   }
 
   // Toca automaticamente ao parar de andar
   setTimeout(() => {
     playSound();
-  }, 5200); // após andar 5s
+  }, 5200);
 </script>
 
 </body>
