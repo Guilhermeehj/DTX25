@@ -1,16 +1,14 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <title>Ovelhinha para Lorrani</title>
+  <title>Te amo Lorrani</title>
   <style>
     body {
       margin: 0;
       background: #fff0f5;
-      height: 100vh;
       overflow: hidden;
       font-family: 'Arial', sans-serif;
-      position: relative;
     }
 
     .text {
@@ -21,53 +19,22 @@
       font-size: 28px;
       font-weight: bold;
       color: #d13c6e;
+      z-index: 1;
     }
 
     .sheep {
       position: absolute;
-      bottom: 100px;
-      left: -150px;
-      width: 120px;
-      animation: walk 5s ease-in-out forwards, jump 1s ease-in-out 5s infinite alternate;
+      bottom: 80px;
+      left: -300px;
+      width: 160px;
+      transition: transform 0.5s;
+      animation: walk 4s ease-out forwards, jump 1s ease-in-out 4s infinite alternate;
       cursor: pointer;
-    }
-
-    .sheep .head {
-      width: 100px;
-      height: 60px;
-      background: #fff;
-      border: 4px dotted #ccc;
-      border-radius: 50% 50% 40% 40%;
-      position: absolute;
-      top: 0;
-      left: 10px;
-    }
-
-    .sheep .eye {
-      width: 8px;
-      height: 8px;
-      background: #000;
-      border-radius: 50%;
-      position: absolute;
-      top: 20px;
-    }
-
-    .sheep .eye.left { left: 25px; }
-    .sheep .eye.right { right: 25px; }
-
-    .sheep .body {
-      width: 120px;
-      height: 120px;
-      background: #fff;
-      border: 4px dotted #ccc;
-      border-radius: 50%;
-      position: absolute;
-      top: 50px;
-      left: 0;
+      z-index: 2;
     }
 
     @keyframes walk {
-      0% { left: -150px; }
+      0% { left: -300px; }
       100% { left: 50%; transform: translateX(-50%); }
     }
 
@@ -79,30 +46,22 @@
 </head>
 <body>
 
-<div class="sheep" onclick="playSound()">
-  <div class="head">
-    <div class="eye left"></div>
-    <div class="eye right"></div>
-  </div>
-  <div class="body"></div>
-</div>
+  <img src="ovelhinha.png" alt="Ovelhinha" class="sheep" onclick="playSound()" />
 
-<div class="text">Te amo Lorrani</div>
+  <div class="text">Te amo Lorrani</div>
 
-<audio id="baa" src="https://www.soundjay.com/animal/sheep-bleating-01.mp3" preload="auto"></audio>
+  <audio id="baa" src="https://www.soundjay.com/animal/sheep-bleating-01.mp3" preload="auto"></audio>
 
-<script>
-  function playSound() {
-    const sound = document.getElementById('baa');
-    sound.currentTime = 0;
-    sound.play();
-  }
+  <script>
+    function playSound() {
+      const audio = document.getElementById('baa');
+      audio.currentTime = 0;
+      audio.play();
+    }
 
-  // Toca automaticamente ao parar de andar
-  setTimeout(() => {
-    playSound();
-  }, 5200);
-</script>
+    // Toca o som automaticamente após andar
+    setTimeout(playSound, 4200);
+  </script>
 
 </body>
 </html>
