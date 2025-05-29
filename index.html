@@ -1,54 +1,60 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ovelha com Coração</title>
+  <title>Te amo Lorrani</title>
   <style>
     body {
-      background-color: #fdf6f0;
-      font-family: 'Segoe UI', sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
       margin: 0;
+      padding: 0;
+      background: #fcdce2;
+      overflow: hidden;
+      font-family: 'Arial', sans-serif;
     }
 
     h1 {
-      color: #d77a61;
-      margin-bottom: 20px;
+      position: absolute;
+      bottom: 50px;
+      width: 100%;
+      text-align: center;
+      font-size: 3em;
+      color: #ff4d6d;
+      z-index: 1;
     }
 
-    .image-container {
-      background: white;
-      padding: 20px;
-      border-radius: 20px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    .sheep {
+      position: absolute;
+      bottom: 100px;
+      width: 150px;
+      animation: runJump 8s infinite linear;
     }
 
-    img {
-      max-width: 100%;
-      height: auto;
-      border-radius: 10px;
-    }
-
-    p {
-      color: #555;
-      margin-top: 15px;
+    @keyframes runJump {
+      0% {
+        left: -200px;
+        bottom: 100px;
+      }
+      20% {
+        bottom: 160px;
+      }
+      25% {
+        bottom: 100px;
+      }
+      40% {
+        bottom: 160px;
+      }
+      50% {
+        bottom: 100px;
+      }
+      100% {
+        left: 110%;
+        bottom: 100px;
+      }
     }
   </style>
 </head>
 <body>
-
-  <h1>💖 Ovelha com Coração 💖</h1>
-
-  <div class="image-container">
-    <!-- Altere o nome do arquivo caso a imagem tenha outro nome -->
-    <img src="sheep_heart.png" alt="Ovelha olhando para um coração">
-    <p>Uma ovelhinha apaixonada... 🐑❤️</p>
-  </div>
-
+  <img src="sheep_heart.png" alt="Ovelha com coração" class="sheep">
+  <h1>Te amo Lorrani</h1>
 </body>
 </html>
