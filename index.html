@@ -2,59 +2,57 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>Te amo Lorrani</title>
+  <title>Ovelha com Coração</title>
   <style>
     body {
       margin: 0;
       padding: 0;
-      background: #fcdce2;
-      overflow: hidden;
-      font-family: 'Arial', sans-serif;
+      font-family: Arial, sans-serif;
+      background: #fff0f5;
+      text-align: center;
     }
 
     h1 {
-      position: absolute;
-      bottom: 50px;
+      color: #ff69b4;
+      margin-top: 40px;
+    }
+
+    .card {
+      margin: 50px auto;
+      background: white;
+      padding: 20px;
+      width: 300px;
+      border-radius: 15px;
+      box-shadow: 0 0 10px #ffb6c1;
+    }
+
+    img {
       width: 100%;
-      text-align: center;
-      font-size: 3em;
-      color: #ff4d6d;
-      z-index: 1;
+      border-radius: 10px;
+      animation: bounce 2s infinite;
     }
 
-    .sheep {
-      position: absolute;
-      bottom: 100px;
-      width: 150px;
-      animation: runJump 8s infinite linear;
-    }
-
-    @keyframes runJump {
-      0% {
-        left: -200px;
-        bottom: 100px;
-      }
-      20% {
-        bottom: 160px;
-      }
-      25% {
-        bottom: 100px;
-      }
-      40% {
-        bottom: 160px;
+    @keyframes bounce {
+      0%, 100% {
+        transform: translateY(0px);
       }
       50% {
-        bottom: 100px;
+        transform: translateY(-20px);
       }
-      100% {
-        left: 110%;
-        bottom: 100px;
-      }
+    }
+
+    p {
+      margin-top: 10px;
+      font-size: 1.2em;
     }
   </style>
 </head>
 <body>
-  <img src="sheep_heart.png" alt="Ovelha com coração" class="sheep">
-  <h1>Te amo Lorrani</h1>
+  <h1>💖 Ovelha com Coração 💖</h1>
+
+  <div class="card">
+    <img src="sheep_heart.png" alt="Ovelha olhando para um coração">
+    <p>Uma ovelhinha apaixonada... 🐑❤️</p>
+  </div>
 </body>
 </html>
