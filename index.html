@@ -1,67 +1,54 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+!DOCTYPE html>
+<html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>Te amo Lorrani</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ovelha com Coração</title>
   <style>
     body {
+      background-color: #fdf6f0;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
       margin: 0;
-      background: #fff0f5;
-      overflow: hidden;
-      font-family: 'Arial', sans-serif;
     }
 
-    .text {
-      position: absolute;
-      bottom: 30px;
-      width: 100%;
-      text-align: center;
-      font-size: 28px;
-      font-weight: bold;
-      color: #d13c6e;
-      z-index: 1;
+    h1 {
+      color: #d77a61;
+      margin-bottom: 20px;
     }
 
-    .sheep {
-      position: absolute;
-      bottom: 80px;
-      left: -300px;
-      width: 160px;
-      transition: transform 0.5s;
-      animation: walk 4s ease-out forwards, jump 1s ease-in-out 4s infinite alternate;
-      cursor: pointer;
-      z-index: 2;
+    .image-container {
+      background: white;
+      padding: 20px;
+      border-radius: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
 
-    @keyframes walk {
-      0% { left: -300px; }
-      100% { left: 50%; transform: translateX(-50%); }
+    img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
     }
 
-    @keyframes jump {
-      0% { transform: translateY(0); }
-      100% { transform: translateY(-20px); }
+    p {
+      color: #555;
+      margin-top: 15px;
     }
   </style>
 </head>
 <body>
 
-  <img src="ovelhinha.png" alt="Ovelhinha" class="sheep" onclick="playSound()" />
+  <h1>💖 Ovelha com Coração 💖</h1>
 
-  <div class="text">Te amo Lorrani</div>
-
-  <audio id="baa" src="https://www.soundjay.com/animal/sheep-bleating-01.mp3" preload="auto"></audio>
-
-  <script>
-    function playSound() {
-      const audio = document.getElementById('baa');
-      audio.currentTime = 0;
-      audio.play();
-    }
-
-    // Toca o som automaticamente após andar
-    setTimeout(playSound, 4200);
-  </script>
+  <div class="image-container">
+    <!-- Altere o nome do arquivo caso a imagem tenha outro nome -->
+    <img src="sheep_heart.png" alt="Ovelha olhando para um coração">
+    <p>Uma ovelhinha apaixonada... 🐑❤️</p>
+  </div>
 
 </body>
 </html>
