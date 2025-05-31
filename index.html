@@ -1,104 +1,74 @@
-<!DOCTYPE html><html lang="pt-br">
+<!DOCTYPE html><html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Login - Personalize Web</title>
+  <title>Login | Personalize Web</title>
   <style>
-    * {
+    body {
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-    body {
-      height: 100vh;
-      background: linear-gradient(to right, #151515, #1e1e1e);
+      background: linear-gradient(to bottom right, #2f80ed, #56ccf2);
       display: flex;
       justify-content: center;
       align-items: center;
-    }
-    .container {
-      background-color: #222;
-      padding: 40px;
-      border-radius: 16px;
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
-      width: 100%;
-      max-width: 400px;
-    }
-    .container h2 {
-      text-align: center;
-      color: #fff;
-      margin-bottom: 24px;
-    }
-    .form-group {
-      margin-bottom: 20px;
-    }
-    label {
-      color: #ccc;
-      display: block;
-      margin-bottom: 6px;
-    }
-    input[type="text"],
-    input[type="password"] {
-      width: 100%;
-      padding: 12px;
-      border: none;
-      border-radius: 8px;
-      background-color: #333;
-      color: #fff;
-      transition: 0.3s;
-    }
-    input[type="text"]:focus,
-    input[type="password"]:focus {
-      outline: none;
-      background-color: #444;
-    }
-    .btn {
-      width: 100%;
-      padding: 12px;
-      background-color: #00d4ff;
-      color: #000;
-      font-weight: bold;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-    .btn:hover {
-      background-color: #00a8cc;
-    }
-    .footer {
-      margin-top: 20px;
-      text-align: center;
-      font-size: 14px;
-      color: #888;
-    }
-    .footer a {
-      color: #00d4ff;
-      text-decoration: none;
-    }
-    .footer a:hover {
-      text-decoration: underline;
-    }
+      height: 100vh;
+    }.login-container {
+  background: white;
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.login-container h2 {
+  margin-bottom: 24px;
+  color: #333;
+}
+
+.login-container input {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+
+.login-container button {
+  width: 100%;
+  padding: 12px;
+  background: #2f80ed;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 16px;
+  transition: 0.3s;
+}
+
+.login-container button:hover {
+  background: #1366d6;
+}
+
+.footer {
+  margin-top: 24px;
+  font-size: 14px;
+  color: #555;
+}
+
   </style>
 </head>
 <body>
-  <div class="container">
-    <h2>Personalize Web</h2>
-    <form action="#" method="POST">
-      <div class="form-group">
-        <label for="username">Usuário</label>
-        <input type="text" id="username" name="username" placeholder="Digite seu usuário" required />
-      </div>
-      <div class="form-group">
-        <label for="password">Senha</label>
-        <input type="password" id="password" name="password" placeholder="Digite sua senha" required />
-      </div>
-      <button class="btn" type="submit">Entrar</button>
-    </form>
-    <div class="footer">
-      <p>Não tem uma conta? <a href="#">Cadastre-se</a></p>
-    </div>
+  <div class="login-container">
+    <h2>Login - Personalize Web</h2>
+    <input type="text" placeholder="Seu nome ou e-mail" />
+    <input type="password" placeholder="Sua senha" />
+    <button>Entrar</button>
+    <div class="footer">Ainda não tem conta? Fale com a gente.</div>
   </div>
 </body>
 </html>
