@@ -1,74 +1,38 @@
-<!DOCTYPE html><html lang="pt-BR">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Login | Personalize Web</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(to bottom right, #2f80ed, #56ccf2);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }.login-container {
-  background: white;
-  padding: 40px;
-  border-radius: 16px;
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
-  width: 100%;
-  max-width: 400px;
-  text-align: center;
-}
+from transformers import AutoModelForCausalLM, AutoTokenizer
+import torch
+import gradio as gr
 
-.login-container h2 {
-  margin-bottom: 24px;
-  color: #333;
-}
+# Carregando modelo e tokenizer
+model_name = "microsoft/DialoGPT-medium"
+tokenizer = AutoTokenizer.from_pretrained(model_name)
+model = AutoModelForCausalLM.from_pretrained(model_name)
 
-.login-container input {
-  width: 100%;
-  padding: 12px;
-  margin: 8px 0;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  font-size: 16px;
-}
+# Função de resposta
+def responder(mensagem, historico=[]):
+    nova_entrada = tokenizer.encode(mensagem + tokenizer.eos_token, return_tensors='pt')
+    
+    if historico:
+        historico_ids = torch.cat([tokenizer.encode(m + tokenizer.eos_token, return_tensors='pt') for m in historico], dim=-1)
+        entrada = torch.cat([historico_ids, nova_entrada], dim=-1)
+    else:
+        entrada = nova_entrada
 
-.login-container button {
-  width: 100%;
-  padding: 12px;
-  background: #2f80ed;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-size: 16px;
-  cursor: pointer;
-  margin-top: 16px;
-  transition: 0.3s;
-}
+    resposta_ids = model.generate(entrada, max_length=1000, pad_token_id=tokenizer.eos_token_id)
+    resposta = tokenizer.decode(resposta_ids[:, entrada.shape[-1]:][0], skip_special_tokens=True)
 
-.login-container button:hover {
-  background: #1366d6;
-}
+    historico.append(mensagem)
+    historico.append(resposta)
+    return resposta, historico
 
-.footer {
-  margin-top: 24px;
-  font-size: 14px;
-  color: #555;
-}
+# Interface Gradio
+chatbot = gr.Interface(
+    fn=responder,
+    inputs=gr.inputs.Textbox(lines=2, placeholder="Digite sua pergunta..."),
+    outputs="text",
+    title="Chatbot IA Simples",
+    description="Um chatbot simples baseado no modelo DialoGPT.",
+    theme="compact"
+)
 
-  </style>
-</head>
-<body>
-  <div class="login-container">
-    <h2>Login - Personalize Web</h2>
-    <input type="text" placeholder="Seu nome ou e-mail" />
-    <input type="password" placeholder="Sua senha" />
-    <button>Entrar</button>
-    <div class="footer">Ainda não tem conta? Fale com a gente.</div>
-  </div>
-</body>
-</html>
+if __name__ == "__main__":
+    chatbot.launch()
