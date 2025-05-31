@@ -1,35 +1,23 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Personalize Web - Demo App</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Personalize Web</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background: linear-gradient(to right, #f2f2f2, #e0f7fa);
+      margin: 20px;
+      background-color: #f5f5f5;
+    }
+    header, section {
+      margin-bottom: 30px;
+    }
+    h1, h2 {
       color: #333;
     }
-    header {
-      background-color: #00796b;
-      color: white;
-      padding: 20px;
-      text-align: center;
-    }
-    main {
-      padding: 20px;
-    }
-    section {
-      margin-bottom: 20px;
-      background: white;
-      padding: 15px;
-      border-radius: 10px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    }
     .currency-buttons button {
-      margin: 5px;
+      margin-right: 10px;
       padding: 10px;
       border: none;
       border-radius: 5px;
@@ -55,6 +43,7 @@
     <h1>Personalize Web</h1>
     <p>Seu aplicativo exclusivo sob medida</p>
   </header>
+
   <main>
     <section>
       <h2>Bem-vindo ao seu app personalizado</h2>
@@ -87,5 +76,34 @@
       </ul>
     </section>
   </main>
+
+  <!-- SCRIPT DE VOZ -->
+  <script>
+    const button = document.querySelector('.voice-button');
+    if ('SpeechRecognition' in window || 'webkitSpeechRecognition' in window) {
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      const recognition = new SpeechRecognition();
+      recognition.lang = 'pt-BR';
+
+      button.addEventListener('click', () => {
+        recognition.start();
+        button.innerText = "Ouvindo...";
+      });
+
+      recognition.onresult = (event) => {
+        const resultado = event.results[0][0].transcript;
+        alert("Você disse: " + resultado);
+        button.innerText = "Falar com o app";
+      };
+
+      recognition.onerror = (event) => {
+        alert("Erro: " + event.error);
+        button.innerText = "Falar com o app";
+      };
+    } else {
+      button.disabled = true;
+      button.innerText = "Voz não suportada";
+    }
+  </script>
 </body>
 </html>
