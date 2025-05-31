@@ -1,87 +1,69 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
+<!DOCTYPE html><html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Personalize Web</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      margin: 20px;
-      background-color: #f5f5f5;
-    }
-
-    header, section {
-      margin-bottom: 30px;
-    }
-
-    h1, h2 {
+      margin: 0;
+      padding: 0;
+      background-color: #f5f7fa;
       color: #333;
-    }
+    }header {
+  background-color: #0a1f44;
+  color: white;
+  text-align: center;
+  padding: 20px 10px;
+}
 
-    .currency-buttons button {
-      margin-right: 10px;
-      padding: 10px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 16px;
-    }
+main {
+  padding: 20px;
+}
 
-    .euro { background: #00796b; color: white; }
-    .real { background: #388e3c; color: white; }
-    .dollar { background: #0288d1; color: white; }
+section {
+  margin-bottom: 30px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
 
-    .voice-button {
-      background: #ff6f00;
-      color: white;
-      padding: 12px 20px;
-      border: none;
-      border-radius: 5px;
-      font-size: 16px;
-      cursor: pointer;
-    }
+button {
+  background-color: #1e88e5;
+  color: white;
+  padding: 15px 25px;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin: 5px 0;
+}
 
-    .row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-    }
+button:active {
+  transform: translateY(2px);
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+}
 
-    .column {
-      flex: 1;
-      min-width: 280px;
-    }
+.voice-button {
+  background-color: #ff6f00;
+}
 
-    .chat-box {
-      background: white;
-      padding: 15px;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
+.info-list li {
+  margin: 10px 0;
+}
 
-    textarea {
-      width: 100%;
-      height: 100px;
-      resize: none;
-      margin-top: 10px;
-      font-size: 14px;
-      padding: 10px;
-    }
+.chat-box {
+  width: 100%;
+  min-height: 100px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  margin-top: 10px;
+  font-size: 14px;
+}
 
-    .send-button {
-      margin-top: 10px;
-      padding: 10px 15px;
-      background-color: #007bff;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    .send-button:hover {
-      background-color: #0056b3;
-    }
   </style>
 </head>
 <body>
@@ -89,111 +71,36 @@
     <h1>Personalize Web</h1>
     <p>Seu aplicativo exclusivo sob medida</p>
   </header>
-
   <main>
     <section>
-      <h2>Bem-vindo ao seu app personalizado</h2>
-      <p>Este é um exemplo do aplicativo que você receberá. Criamos com base exatamente no que você pedir.</p>
-    </section>
+      <h2>Descreva seu aplicativo</h2>
+      <p>Explique como deseja o estilo do seu app e o que ele deve fazer:</p>
+      <textarea class="chat-box" placeholder="Ex: Quero um site com fundo azul, que tenha loja online, botão de contato, etc..."></textarea>
+    </section><section>
+  <h2>Comando por voz</h2>
+  <p>Deseja permitir comandos de voz no app?</p>
+  <button class="voice-button">Ativar Comandos de Voz</button>
+  <button class="voice-button">Não Ativar</button>
+</section>
 
-    <div class="row">
-      <!-- Coluna 1: Voz -->
-      <div class="column">
-        <section>
-          <h2>Comando por voz</h2>
-          <p>Você deseja ativar o comando de voz?</p>
-          <button class="voice-button" id="permitir-voz">Permitir Voz</button>
-          <button class="voice-button" style="background:#ccc; color:#333;" id="negar-voz">Não usar Voz</button>
-          <br><br>
-          <button class="voice-button" id="falar" disabled>Falar com o app</button>
-        </section>
-      </div>
+<section>
+  <h2>Contratar agora</h2>
+  <p>Seu projeto pronto em até 5 dias com qualidade garantida.</p>
+  <button onclick="window.location.href='pagamento.html'">Contratar</button>
+</section>
 
-      <!-- Coluna 2: Chat personalizado -->
-      <div class="column">
-        <section class="chat-box">
-          <h2>Monte seu app ideal</h2>
-          <p>Escreva como deseja o visual do seu app:</p>
-          <textarea id="chat"></textarea>
-          <button class="send-button" onclick="enviarMensagem()">Enviar pedido</button>
-        </section>
-      </div>
-    </div>
+<section>
+  <h2>Informações profissionais</h2>
+  <ul class="info-list">
+    <li>📅 Entrega: até 5 dias após confirmação</li>
+    <li>✅ 1 alteração gratuita</li>
+    <li>💶 Alterações extras: €2 cada (máximo 5)</li>
+    <li>💳 Pagamento via Pix (enviado após confirmação)</li>
+    <li>🌍 Moeda escolhida na próxima etapa: Euro, Real ou Dólar</li>
+    <li>🔒 Total segurança e suporte personalizado</li>
+  </ul>
+</section>
 
-    <section>
-      <h2>Escolha sua moeda</h2>
-      <p>Escolha de acordo com a sua moeda nacional:</p>
-      <div class="currency-buttons">
-        <button class="euro">🇪🇺 Euro</button>
-        <button class="real">🇧🇷 Real</button>
-        <button class="dollar">🇺🇸 Dólar</button>
-      </div>
-    </section>
-
-    <section>
-      <h2>Informações importantes</h2>
-      <ul>
-        <li>📅 Entrega: até 5 dias após confirmação</li>
-        <li>🛠️ 1 alteração gratuita</li>
-        <li>💰 Alterações extras: €2 cada (máx. 5)</li>
-        <li>💬 Pagamento via Pix (enviado após confirmação)</li>
-      </ul>
-    </section>
   </main>
-
-  <!-- SCRIPT DE VOZ E CHAT -->
-  <script>
-    const botaoVoz = document.getElementById('falar');
-    const permitirVoz = document.getElementById('permitir-voz');
-    const negarVoz = document.getElementById('negar-voz');
-
-    let recognition;
-    if ('SpeechRecognition' in window || 'webkitSpeechRecognition' in window) {
-      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-      recognition = new SpeechRecognition();
-      recognition.lang = 'pt-BR';
-
-      recognition.onresult = (event) => {
-        const resultado = event.results[0][0].transcript;
-        alert("Você disse: " + resultado);
-        botaoVoz.innerText = "Falar com o app";
-      };
-
-      recognition.onerror = (event) => {
-        alert("Erro: " + event.error);
-        botaoVoz.innerText = "Falar com o app";
-      };
-
-      botaoVoz.addEventListener('click', () => {
-        recognition.start();
-        botaoVoz.innerText = "Ouvindo...";
-      });
-
-      permitirVoz.addEventListener('click', () => {
-        botaoVoz.disabled = false;
-        alert("Comando de voz ativado.");
-      });
-
-      negarVoz.addEventListener('click', () => {
-        botaoVoz.disabled = true;
-        alert("Comando de voz desativado.");
-      });
-
-    } else {
-      botaoVoz.disabled = true;
-      permitirVoz.disabled = true;
-      alert("Seu navegador não suporta reconhecimento de voz.");
-    }
-
-    function enviarMensagem() {
-      const msg = document.getElementById('chat').value.trim();
-      if (msg.length > 0) {
-        alert("Mensagem enviada:\n" + msg);
-        document.getElementById('chat').value = "";
-      } else {
-        alert("Escreva algo antes de enviar.");
-      }
-    }
-  </script>
 </body>
 </html>
