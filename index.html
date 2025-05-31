@@ -1,67 +1,113 @@
-<!DOCTYPE html><html lang="pt-BR">
+<!DOCTYPE html><html lang="pt-br">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Personalize Web</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Personalize Web - Pagamento</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Segoe UI', sans-serif;
       margin: 0;
       padding: 0;
-      background-color: #f5f7fa;
+      background: #f0f4f8;
       color: #333;
     }header {
-  background-color: #0a1f44;
+  background: #0d47a1;
   color: white;
+  padding: 20px;
   text-align: center;
-  padding: 20px 10px;
 }
 
-main {
+.container {
+  padding: 30px;
+  max-width: 800px;
+  margin: auto;
+}
+
+.section {
+  background: white;
+  border-radius: 12px;
   padding: 20px;
-}
-
-section {
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   margin-bottom: 30px;
-  background-color: white;
-  border-radius: 10px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  padding: 20px;
+}
+
+h2 {
+  color: #0d47a1;
+}
+
+textarea, input, select {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
 }
 
 button {
-  background-color: #1e88e5;
+  background: #0d47a1;
   color: white;
+  border: none;
   padding: 15px 25px;
+  font-size: 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:active {
+  transform: scale(0.97);
+  background: #09307a;
+}
+
+.voice-toggle {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.voice-toggle input {
+  margin-right: 10px;
+}
+
+.ready-projects img {
+  width: 100%;
+  border-radius: 12px;
+  margin-top: 15px;
+}
+
+.ready-projects .card {
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  padding: 15px;
+  margin-top: 20px;
+}
+
+.payment-section {
+  background: white;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.currency-selector button {
+  margin: 5px;
+  padding: 10px 15px;
   font-size: 16px;
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  transition: all 0.2s ease;
-  margin: 5px 0;
 }
 
-button:active {
-  transform: translateY(2px);
-  box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+.pix-area {
+  margin-top: 20px;
+  display: none;
 }
 
-.voice-button {
-  background-color: #ff6f00;
-}
-
-.info-list li {
-  margin: 10px 0;
-}
-
-.chat-box {
-  width: 100%;
-  min-height: 100px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  padding: 10px;
-  margin-top: 10px;
-  font-size: 14px;
+img.qrcode {
+  width: 200px;
+  height: 200px;
 }
 
   </style>
@@ -69,38 +115,68 @@ button:active {
 <body>
   <header>
     <h1>Personalize Web</h1>
-    <p>Seu aplicativo exclusivo sob medida</p>
-  </header>
-  <main>
-    <section>
-      <h2>Descreva seu aplicativo</h2>
-      <p>Explique como deseja o estilo do seu app e o que ele deve fazer:</p>
-      <textarea class="chat-box" placeholder="Ex: Quero um site com fundo azul, que tenha loja online, botão de contato, etc..."></textarea>
-    </section><section>
-  <h2>Comando por voz</h2>
-  <p>Deseja permitir comandos de voz no app?</p>
-  <button class="voice-button">Ativar Comandos de Voz</button>
-  <button class="voice-button">Não Ativar</button>
-</section>
+    <p>Crie o aplicativo do seu jeito</p>
+  </header>  <div class="container">
+    <div class="section">
+      <h2>Descreva como deseja seu aplicativo:</h2>
+      <textarea placeholder="Conte como quer o estilo e as funções..."></textarea>
+      <div class="voice-toggle">
+        <input type="checkbox" id="voz">
+        <label for="voz">Ativar comando de voz personalizado</label>
+      </div>
+    </div><div class="section ready-projects">
+  <h2>Projetos já prontos (exemplos):</h2>
+  <div class="card">
+    <img src="https://via.placeholder.com/600x300.png?text=App+Futurista+1">
+    <p>Nome: FastCook - Receitas instantâneas</p>
+  </div>
+  <div class="card">
+    <img src="https://via.placeholder.com/600x300.png?text=App+Futurista+2">
+    <p>Nome: SmartAgenda - Organizador inteligente</p>
+  </div>
+</div>
 
-<section>
-  <h2>Contratar agora</h2>
-  <p>Seu projeto pronto em até 5 dias com qualidade garantida.</p>
-  <button onclick="window.location.href='pagamento.html'">Contratar</button>
-</section>
+<div class="section">
+  <button onclick="abrirPagamento()">📲 Contratar</button>
+</div>
 
-<section>
-  <h2>Informações profissionais</h2>
-  <ul class="info-list">
-    <li>📅 Entrega: até 5 dias após confirmação</li>
-    <li>✅ 1 alteração gratuita</li>
-    <li>💶 Alterações extras: €2 cada (máximo 5)</li>
-    <li>💳 Pagamento via Pix (enviado após confirmação)</li>
-    <li>🌍 Moeda escolhida na próxima etapa: Euro, Real ou Dólar</li>
-    <li>🔒 Total segurança e suporte personalizado</li>
-  </ul>
-</section>
+<div class="section payment-section" id="pagamento" style="display: none;">
+  <h2>Escolha a moeda</h2>
+  <p>Escolha de acordo com sua moeda nacional para receber os dados de pagamento:</p>
+  <div class="currency-selector">
+    <button onclick="mostrarPix('brl')">🇧🇷 Real (BRL)</button>
+    <button onclick="mostrarPix('eur')">🇪🇺 Euro (EUR)</button>
+    <button onclick="mostrarPix('usd')">🇺🇸 Dólar (USD)</button>
+  </div>
 
-  </main>
-</body>
+  <div id="pix-brl" class="pix-area">
+    <h2>Pagamento em Real (R$)</h2>
+    <img class="qrcode" src="https://via.placeholder.com/200x200.png?text=QR+Code+BRL" alt="QR Code BRL">
+    <p>Chave Pix: <strong>pix@personalizeweb.com</strong></p>
+  </div>
+
+  <div id="pix-eur" class="pix-area">
+    <h2>Pagamento em Euro (€)</h2>
+    <img class="qrcode" src="https://via.placeholder.com/200x200.png?text=QR+Code+EUR" alt="QR Code EUR">
+    <p>Chave Pix: <strong>eu@personalizeweb.com</strong></p>
+  </div>
+
+  <div id="pix-usd" class="pix-area">
+    <h2>Pagamento em Dólar (US$)</h2>
+    <img class="qrcode" src="https://via.placeholder.com/200x200.png?text=QR+Code+USD" alt="QR Code USD">
+    <p>Chave Pix: <strong>usa@personalizeweb.com</strong></p>
+  </div>
+</div>
+
+  </div>  <script>
+    function abrirPagamento() {
+      document.getElementById('pagamento').scrollIntoView({ behavior: 'smooth' });
+      document.getElementById('pagamento').style.display = 'block';
+    }
+
+    function mostrarPix(moeda) {
+      document.querySelectorAll('.pix-area').forEach(div => div.style.display = 'none');
+      document.getElementById('pix-' + moeda).style.display = 'block';
+    }
+  </script></body>
 </html>
