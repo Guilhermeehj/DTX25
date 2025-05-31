@@ -3,98 +3,89 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Painel de Pagamento</title>
+  <title>Personalize Web - Demo App</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-color: #f5f5f5;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to right, #f2f2f2, #e0f7fa);
+      color: #333;
+    }
+    header {
+      background-color: #00796b;
+      color: white;
       padding: 20px;
       text-align: center;
     }
-    h1 {
-      color: #333;
+    main {
+      padding: 20px;
     }
-    .botoes {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      margin-top: 30px;
-      flex-wrap: wrap;
+    section {
+      margin-bottom: 20px;
+      background: white;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     }
-    .botao-moeda {
-      padding: 15px 25px;
-      font-size: 16px;
+    .currency-buttons button {
+      margin: 5px;
+      padding: 10px;
       border: none;
-      border-radius: 8px;
+      border-radius: 5px;
       cursor: pointer;
-      background-color: #007bff;
+      font-size: 16px;
+    }
+    .euro { background: #00796b; color: white; }
+    .real { background: #388e3c; color: white; }
+    .dollar { background: #0288d1; color: white; }
+    .voice-button {
+      background: #ff6f00;
       color: white;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      transition: background-color 0.3s;
-    }
-    .botao-moeda:hover {
-      background-color: #0056b3;
-    }
-    .moeda-icone {
-      font-size: 20px;
-    }
-    .painel-pagamento {
-      margin-top: 40px;
-      display: none;
-    }
-    .qr-code {
-      margin-top: 20px;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
-  <h1>Escolha sua moeda nacional para realizar o pagamento com Pix ou QR Code:</h1>
-  <div class="botoes">
-    <button class="botao-moeda" onclick="mostrarPagamento('real')">🇧🇷 Pagar em Reais (R$)</button>
-    <button class="botao-moeda" onclick="mostrarPagamento('euro')">🇪🇺 Pagar em Euros (€)</button>
-    <button class="botao-moeda" onclick="mostrarPagamento('dolar')">🇺🇸 Pagar em Dólares (US$)</button>
-  </div>
+  <header>
+    <h1>Personalize Web</h1>
+    <p>Seu aplicativo exclusivo sob medida</p>
+  </header>
+  <main>
+    <section>
+      <h2>Bem-vindo ao seu app personalizado</h2>
+      <p>Este é um exemplo do aplicativo que você receberá. Criamos com base exatamente no que você pedir.</p>
+    </section>
 
-  <div class="painel-pagamento" id="painel-pagamento">
-    <h2 id="titulo-moeda"></h2>
-    <p>Use o QR Code abaixo para realizar o pagamento:</p>
-    <img id="qr-code" class="qr-code" src="" alt="QR Code" width="200">
-    <p>Ou use a chave Pix: <strong id="chave-pix"></strong></p>
-  </div>
+    <section>
+      <h2>Comando por voz</h2>
+      <p>Seu app poderá responder aos seus comandos de voz exclusivos.</p>
+      <button class="voice-button">Falar com o app</button>
+    </section>
 
-  <script>
-    const pagamentos = {
-      real: {
-        titulo: 'Pagamento em Reais (R$)',
-        chave: 'pix@seudominio.com',
-        qr: 'https://api.qrserver.com/v1/create-qr-code/?data=pix@seudominio.com&size=200x200'
-      },
-      euro: {
-        titulo: 'Pagamento em Euros (€)',
-        chave: 'euro@seudominio.com',
-        qr: 'https://api.qrserver.com/v1/create-qr-code/?data=euro@seudominio.com&size=200x200'
-      },
-      dolar: {
-        titulo: 'Pagamento em Dólares (US$)',
-        chave: 'dolar@seudominio.com',
-        qr: 'https://api.qrserver.com/v1/create-qr-code/?data=dolar@seudominio.com&size=200x200'
-      }
-    };
+    <section>
+      <h2>Escolha sua moeda</h2>
+      <p>Escolha de acordo com a sua moeda nacional:</p>
+      <div class="currency-buttons">
+        <button class="euro">🇪🇺 Euro</button>
+        <button class="real">🇧🇷 Real</button>
+        <button class="dollar">🇺🇸 Dólar</button>
+      </div>
+    </section>
 
-    function mostrarPagamento(moeda) {
-      const painel = document.getElementById('painel-pagamento');
-      const titulo = document.getElementById('titulo-moeda');
-      const qr = document.getElementById('qr-code');
-      const chave = document.getElementById('chave-pix');
-
-      titulo.innerText = pagamentos[moeda].titulo;
-      chave.innerText = pagamentos[moeda].chave;
-      qr.src = pagamentos[moeda].qr;
-
-      painel.style.display = 'block';
-    }
-  </script>
+    <section>
+      <h2>Informações importantes</h2>
+      <ul>
+        <li>📅 Entrega: até 5 dias após confirmação</li>
+        <li>🛠️ 1 alteração gratuita</li>
+        <li>💰 Alterações extras: €2 cada (máx. 5)</li>
+        <li>💬 Pagamento via Pix (enviado após confirmação)</li>
+      </ul>
+    </section>
+  </main>
 </body>
 </html>
