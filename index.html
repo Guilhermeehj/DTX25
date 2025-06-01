@@ -7,73 +7,68 @@
     body {
       margin: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #e5ddd5;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      background: #dbe1ea;
       height: 100vh;
     }
     .chat-container {
-      width: 100%;
-      max-width: 400px;
-      height: 600px;
-      background-color: #fff;
+      width: 100vw;
+      height: 100vh;
+      background-color: #f0f2f5;
       display: flex;
       flex-direction: column;
-      border-radius: 10px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-      overflow: hidden;
     }
     .chat-header {
-      background-color: #075e54;
+      background-color: #0b3d91;
       color: white;
-      padding: 15px;
-      font-size: 18px;
+      padding: 20px;
+      font-size: 20px;
     }
     .chat-messages {
       flex: 1;
-      padding: 10px;
+      padding: 20px;
       overflow-y: auto;
-      background: #ece5dd;
+      background: #e9edf1;
+      display: flex;
+      flex-direction: column;
     }
     .message {
-      max-width: 80%;
+      max-width: 70%;
       margin: 5px 0;
-      padding: 10px;
-      border-radius: 10px;
-      clear: both;
+      padding: 12px;
+      border-radius: 12px;
+      line-height: 1.4;
     }
     .sent {
-      background-color: #dcf8c6;
+      background-color: #cce2ff;
       align-self: flex-end;
-      float: right;
     }
     .received {
-      background-color: #fff;
+      background-color: #ffffff;
       align-self: flex-start;
-      float: left;
     }
     .chat-input {
       display: flex;
-      padding: 10px;
-      background-color: #f0f0f0;
+      padding: 15px;
+      background-color: #f7f7f7;
+      border-top: 1px solid #ddd;
     }
     .chat-input input {
       flex: 1;
-      padding: 10px;
+      padding: 12px;
       border: 1px solid #ccc;
       border-radius: 20px;
       outline: none;
     }
     .chat-input button {
-      background-color: #075e54;
+      background-color: #0b3d91;
       color: white;
       border: none;
       border-radius: 50%;
-      width: 40px;
-      height: 40px;
+      width: 45px;
+      height: 45px;
       margin-left: 10px;
       cursor: pointer;
+      font-size: 16px;
     }
   </style>
 </head>
@@ -83,10 +78,15 @@
       Personalize Web - Chat com Cliente
     </div>
     <div class="chat-messages" id="chatMessages">
-      <div class="message received">Olá! Como posso te ajudar hoje?</div>
+      <div class="message received">Olá! Seja bem-vindo à Personalize Web 👋</div>
+      <div class="message received">Vamos montar seu aplicativo personalizado agora mesmo.</div>
+      <div class="message received">1️⃣ Qual o nome do aplicativo que você deseja?</div>
+      <div class="message received">2️⃣ Descreva o que o aplicativo deve fazer.</div>
+      <div class="message received">3️⃣ Quais cores você gostaria que fossem usadas?</div>
+      <div class="message received">4️⃣ Quer comandos por voz ativados?</div>
     </div>
     <div class="chat-input">
-      <input type="text" id="userInput" placeholder="Digite sua mensagem..." />
+      <input type="text" id="userInput" placeholder="Digite sua resposta aqui..." />
       <button onclick="sendMessage()">▶</button>
     </div>
   </div>  <script>
@@ -107,7 +107,7 @@
       setTimeout(() => {
         const botMsg = document.createElement('div');
         botMsg.className = 'message received';
-        botMsg.innerText = 'Recebido! Em breve entraremos em contato.';
+        botMsg.innerText = 'Perfeito! Sua resposta foi registrada.';
         chatBox.appendChild(botMsg);
         chatBox.scrollTop = chatBox.scrollHeight;
       }, 1000);
