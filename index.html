@@ -5,78 +5,80 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Personalize Web</title>
   <style>
-    body {
+    * {
       margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body, html {
+      height: 100%;
       font-family: Arial, sans-serif;
       background-color: #e6f0f5;
+      display: flex;
+      flex-direction: column;
     }
 
     header {
       background-color: #0d1b2a;
       color: white;
-      padding: 15px;
+      padding: 20px;
       text-align: center;
-      font-size: 22px;
+      font-size: 24px;
       font-weight: bold;
     }
 
-    .chat {
-      max-width: 600px;
-      margin: auto;
+    .content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
       padding: 20px;
     }
 
-    .bot, .user, .extra {
-      background-color: white;
-      border-radius: 10px;
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 600px;
+    }
+
+    textarea {
+      width: 100%;
       padding: 15px;
-      margin-bottom: 10px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      resize: vertical;
+      min-height: 150px;
+      margin-bottom: 15px;
     }
 
-    .bot {
-      background-color: #f1f1f1;
-      text-align: left;
-    }
-
-    .user {
-      background-color: #d8eafd;
-      text-align: right;
-    }
-
-    .footer {
-      background-color: #0d1b2a;
-      color: white;
-      padding: 10px;
-      text-align: center;
-      font-size: 14px;
-      margin-top: 40px;
+    small {
+      color: #666;
     }
 
     .enviar {
       background-color: #28a745;
       color: white;
       border: none;
-      border-radius: 8px;
-      padding: 12px 20px;
+      border-radius: 10px;
+      padding: 15px;
       font-size: 16px;
-      display: block;
-      margin: 20px auto;
-      cursor: pointer;
-    }
-
-    textarea {
       width: 100%;
-      padding: 10px;
-      margin-top: 15px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      font-size: 16px;
-      resize: vertical;
+      cursor: pointer;
+      margin-top: 10px;
     }
 
-    .extra small {
-      color: #555;
+    footer {
+      background-color: #0d1b2a;
+      color: white;
+      text-align: center;
+      padding: 12px;
+      font-size: 14px;
     }
   </style>
 </head>
@@ -84,33 +86,30 @@
 
   <header>Personalize Web</header>
 
-  <div class="chat">
-    <div class="bot">👋 Olá! Somos da Personalize Web. Criamos sites sob medida para o que você precisa.</div>
-    <div class="bot">💬 Como você gostaria que fosse seu site?</div>
-    <div class="user">Quero um site moderno, com fotos e que funcione no celular.</div>
-
-    <div class="bot">🎨 Quais cores você gostaria de usar no seu site?</div>
-    <div class="user">Azul escuro e branco.</div>
-
-    <div class="bot">🧠 Deseja que o site tenha comandos por voz? (Custo adicional de R$10)</div>
-    <div class="user">Sim, quero sim!</div>
-
-    <div class="bot">✅ Perfeito! Se quiser mudar algo ou acrescentar alguma coisa, digite aqui.</div>
-
-    <div class="bot">🍰 Quando estiver pronto, aperte no botão abaixo para enviar ao vendedor.</div>
-
-    <div class="extra">
-      <strong>📌 Descreva seu projeto:</strong><br>
-      <textarea placeholder="Ex: Quero um site para restaurante com cardápio, reservas e localização..."></textarea>
-      <small>Dica: você pode pedir um portfólio, loja online, blog, catálogo de produtos, área de login, formulários, integração com WhatsApp ou redes sociais, etc.</small>
+  <div class="content">
+    <div class="card">
+      <strong>📌 Descreva seu projeto:</strong>
+      <textarea id="mensagem" placeholder="Ex: Quero um site para barbearia com agendamentos, fotos e mapa..."></textarea>
+      <small>Dica: Você pode pedir blog, portfólio, loja online, catálogo, integração com redes sociais, e muito mais!</small>
+      <button class="enviar" onclick="enviarMensagem()">Enviar para o vendedor</button>
     </div>
-
-    <a href="https://chat.whatsapp.com/F6dEP4KaqgiBqRSpe9F0xq">
-      <button class="enviar">Enviar para o vendedor</button>
-    </a>
   </div>
 
-  <div class="footer">© 2025 Personalize Web — Sites feitos do seu jeito.</div>
+  <footer>© 2025 Personalize Web — Sites feitos do seu jeito.</footer>
+
+  <script>
+    function enviarMensagem() {
+      const texto = document.getElementById("mensagem").value.trim();
+      if (!texto) {
+        alert("Por favor, escreva sua ideia primeiro.");
+        return;
+      }
+
+      const msg = encodeURIComponent(texto);
+      const link = `https://api.whatsapp.com/send?text=${msg}&phone=&app_absent=0`;
+      window.open(link, "_blank");
+    }
+  </script>
 
 </body>
 </html>
