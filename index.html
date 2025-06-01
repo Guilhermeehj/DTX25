@@ -1,187 +1,134 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Personalize Web - Chat</title>
+  <meta charset="UTF-8">
+  <title>Personalize Web</title>
   <style>
     body {
+      font-family: Arial, sans-serif;
+      background-color: #e0f0ff;
       margin: 0;
-      background-color: #d0e7ff;
-      font-family: 'Segoe UI', sans-serif;
     }
-
     header {
-      background-color: #001f3f;
+      background-color: #003366;
       color: white;
       padding: 15px;
       text-align: center;
-      font-size: 24px;
+      font-size: 22px;
       font-weight: bold;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
     }
-
     .chat-container {
-      max-width: 600px;
-      margin: 80px auto 20px;
-      background-color: white;
-      border-radius: 10px;
       padding: 20px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      max-width: 600px;
+      margin: auto;
     }
-
-    .message {
+    .msg {
+      padding: 10px;
+      border-radius: 10px;
       margin: 10px 0;
-      padding: 12px 15px;
-      border-radius: 20px;
       max-width: 80%;
-      line-height: 1.4;
+      word-wrap: break-word;
+      animation: fadeIn 0.5s ease;
     }
-
-    .bot {
-      background-color: #e1f0ff;
+    .msg.bot {
+      background-color: #ffffff;
       text-align: left;
     }
-
-    .user {
-      background-color: #c8ffc8;
-      text-align: right;
+    .msg.user {
+      background-color: #cce5ff;
       margin-left: auto;
+      text-align: right;
     }
-
     .typing {
       font-style: italic;
-      color: gray;
-      animation: blink 1s infinite;
+      opacity: 0.6;
+      animation: blink 1s steps(1, start) infinite;
     }
-
-    @keyframes blink {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.3; }
-    }
-
-    .respostas {
-      margin-top: 10px;
-    }
-
-    .respostas button {
-      padding: 10px 15px;
-      margin: 5px 5px 0 0;
-      border: none;
-      border-radius: 20px;
-      background-color: #007bff;
-      color: white;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    #whatsappBtn {
-      width: 100%;
-      margin-top: 20px;
+    .btn {
+      display: block;
+      margin: 15px auto;
       background-color: #28a745;
       color: white;
-      font-weight: bold;
-      padding: 12px;
-      border-radius: 25px;
       border: none;
+      padding: 15px 25px;
+      border-radius: 5px;
       font-size: 16px;
       cursor: pointer;
+    }
+    @keyframes blink {
+      50% { opacity: 1; }
+      100% { opacity: 0.6; }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
   </style>
 </head>
 <body>
-  <header>Personalize Web</header>
-  <div class="chat-container" id="chatBox">
-    <div class="message bot">👋 Olá! Bem-vindo à Personalize Web. Criamos sites personalizados conforme o seu gosto!</div>
-    <div class="message bot">💡 Como você gostaria que fosse o seu site?</div>
-  </div>
 
-  <div class="chat-container">
-    <div class="respostas" id="respostasBox"></div>
-    <button id="whatsappBtn">📲 Enviar para o Vendedor</button>
-  </div>
+<header>Personalize Web - Criação de Sites</header>
 
-  <script>
-    const perguntas = [
-      {
-        texto: "💡 Como você gostaria que fosse o seu site?",
-        opcoes: ["Simples e direto", "Moderno e animado", "Estilo portfólio", "Com loja integrada"]
-      },
-      {
-        texto: "🎨 Quais cores você prefere?",
-        opcoes: ["Azul escuro", "Verde e branco", "Preto e dourado", "Roxo e cinza"]
-      },
-      {
-        texto: "⚙️ O que o site deve fazer?",
-        opcoes: ["Apresentar meus serviços", "Vender produtos", "Mostrar meu portfólio", "Coletar contatos"]
-      },
-      {
-        texto: "🧠 Deseja integração por voz? (+R$10)",
-        opcoes: ["Sim, desejo", "Não preciso disso"]
-      },
-      {
-        texto: "📱 Deseja que funcione bem no celular?",
-        opcoes: ["Sim, com certeza", "Não é prioridade"]
-      }
-    ];
+<div class="chat-container" id="chat">
+  <div class="msg bot">⚠️ Apenas projetos dentro da lei serão aceitos.</div>
+</div>
 
-    const respostas = [];
-    let perguntaIndex = 0;
+<button class="btn" onclick="enviarWhatsApp()">Enviar para o vendedor</button>
 
-    const chatBox = document.getElementById('chatBox');
-    const respostasBox = document.getElementById('respostasBox');
-    const whatsappBtn = document.getElementById('whatsappBtn');
+<script>
+  const mensagens = [
+    "Olá! Seja bem-vindo à Personalize Web.",
+    "Sou seu assistente virtual. Vamos criar o site do seu jeito!",
+    "Como você gostaria que o site fosse visualmente?",
+    "Quais funcionalidades você quer que ele tenha?",
+    "Você prefere alguma cor específica no seu site?",
+    "Deseja integração por voz? Isso terá um acréscimo de R$10,00.",
+    "Caso queira mudar algo ou acrescentar alguma coisa, digite aqui.",
+    "Aperte em Enviar para o vendedor."
+  ];
 
-    function adicionarMensagem(texto, classe) {
-      const msg = document.createElement('div');
-      msg.className = `message ${classe}`;
-      msg.textContent = texto;
-      chatBox.appendChild(msg);
-      chatBox.scrollTop = chatBox.scrollHeight;
+  const chat = document.getElementById("chat");
+
+  function adicionarMensagem(texto, classe) {
+    const msg = document.createElement("div");
+    msg.className = "msg " + classe;
+    msg.innerText = texto;
+    chat.appendChild(msg);
+    chat.scrollTop = chat.scrollHeight;
+  }
+
+  function mostrarDigitando(callback) {
+    const typing = document.createElement("div");
+    typing.className = "msg bot typing";
+    typing.innerText = "digitando...";
+    chat.appendChild(typing);
+    chat.scrollTop = chat.scrollHeight;
+    setTimeout(() => {
+      chat.removeChild(typing);
+      callback();
+    }, 1500);
+  }
+
+  function iniciarChat(i = 0) {
+    if (i < mensagens.length) {
+      mostrarDigitando(() => {
+        adicionarMensagem(mensagens[i], "bot");
+        iniciarChat(i + 1);
+      });
     }
+  }
 
-    function mostrarDigitando(callback) {
-      const typing = document.createElement('div');
-      typing.className = 'message bot typing';
-      typing.textContent = "Digitando...";
-      chatBox.appendChild(typing);
-      chatBox.scrollTop = chatBox.scrollHeight;
+  function enviarWhatsApp() {
+    const numero = "5524999241876";
+    const mensagensEnviadas = [...document.querySelectorAll(".msg")].map(el => el.innerText).join("\n");
+    const link = `https://wa.me/${numero}?text=${encodeURIComponent(mensagensEnviadas)}`;
+    window.open(link, "_blank");
+  }
 
-      setTimeout(() => {
-        chatBox.removeChild(typing);
-        callback();
-      }, 1300);
-    }
+  window.onload = () => {
+    iniciarChat();
+  };
+</script>
 
-    function mostrarPergunta() {
-      respostasBox.innerHTML = '';
-      if (perguntaIndex < perguntas.length) {
-        mostrarDigitando(() => {
-          adicionarMensagem(perguntas[perguntaIndex].texto, 'bot');
-          perguntas[perguntaIndex].opcoes.forEach(opcao => {
-            const btn = document.createElement('button');
-            btn.textContent = opcao;
-            btn.onclick = () => {
-              adicionarMensagem(opcao, 'user');
-              respostas.push(`${perguntas[perguntaIndex].texto} ${opcao}`);
-              perguntaIndex++;
-              mostrarPergunta();
-            };
-            respostasBox.appendChild(btn);
-          });
-        });
-      }
-    }
-
-    whatsappBtn.onclick = () => {
-      const phone = "5524999241876";
-      const mensagem = respostas.join('\n');
-      const url = `https://wa.me/${phone}?text=${encodeURIComponent("Olá! Aqui estão minhas escolhas para o projeto:\n" + mensagem)}`;
-      window.open(url, "_blank");
-    };
-
-    // Iniciar chat
-    mostrarPergunta();
-  </script>
 </body>
 </html>
