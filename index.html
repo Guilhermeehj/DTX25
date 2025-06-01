@@ -1,103 +1,117 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Personalize Web</title>
   <style>
-    * {
+    body {
       margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body, html {
-      height: 100%;
-      font-family: Arial, sans-serif;
-      background-color: #e6f0f5;
-      display: flex;
-      flex-direction: column;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #e6f2ff;
+      color: #001f3f;
     }
 
     header {
-      background-color: #0d1b2a;
+      background-color: #003366;
       color: white;
-      padding: 20px;
+      padding: 15px;
       text-align: center;
-      font-size: 24px;
-      font-weight: bold;
     }
 
-    .content {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
+    h2 {
+      font-size: 18px;
+      margin: 20px auto 10px;
+      text-align: center;
     }
 
-    .card {
-      background: white;
+    .container {
+      max-width: 600px;
+      margin: 10px auto;
+      background: #ffffff;
       padding: 20px;
       border-radius: 12px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      width: 100%;
-      max-width: 600px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      text-align: center;
     }
 
-    textarea {
-      width: 100%;
-      padding: 15px;
-      font-size: 16px;
-      border: 1px solid #ccc;
-      border-radius: 10px;
-      resize: vertical;
-      min-height: 150px;
-      margin-bottom: 15px;
+    .suggestions {
+      text-align: left;
+      font-size: 14px;
+      color: #333;
+      margin-bottom: 20px;
     }
 
-    small {
-      color: #666;
+    .suggestions ul {
+      padding-left: 20px;
     }
 
-    .enviar {
-      background-color: #28a745;
+    .btn-whatsapp {
+      display: inline-block;
+      background-color: #25D366;
       color: white;
+      padding: 15px 25px;
       border: none;
       border-radius: 10px;
-      padding: 15px;
       font-size: 16px;
-      width: 100%;
       cursor: pointer;
-      margin-top: 10px;
+      transition: background 0.3s;
+      text-decoration: none;
     }
 
-    footer {
-      background-color: #0d1b2a;
+    .btn-whatsapp:hover {
+      background-color: #1ebc59;
+    }
+
+    .chat-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #003366;
       color: white;
-      text-align: center;
-      padding: 12px;
+      padding: 12px 18px;
+      border-radius: 50px;
       font-size: 14px;
+      cursor: pointer;
+      text-decoration: none;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+      transition: background 0.3s;
+    }
+
+    .chat-button:hover {
+      background-color: #005fa3;
     }
   </style>
 </head>
 <body>
 
-  <header>Personalize Web</header>
+  <header>
+    <h1>Personalize Web</h1>
+  </header>
 
-  <div class="content">
-    <div class="card">
-      <strong>📌 Descreva seu projeto:</strong>
-      <textarea placeholder="Ex: Quero um site para barbearia com agendamentos, fotos e mapa..."></textarea>
-      <small>Dica: Você pode pedir blog, portfólio, loja online, catálogo, integração com redes sociais, e muito mais!</small>
-      <a href="https://chat.whatsapp.com/F6dEP4KaqgiBqRSpe9F0xq">
-        <button class="enviar">Enviar para o vendedor</button>
-      </a>
+  <h2>Descreva seu projeto</h2>
+
+  <div class="container">
+    <div class="suggestions">
+      <p>Você pode incluir informações como:</p>
+      <ul>
+        <li>Como deseja o visual do seu site</li>
+        <li>Quais funções o site deve ter</li>
+        <li>Quais cores prefere</li>
+        <li>Deseja integração com redes sociais?</li>
+        <li>Vai vender produtos ou serviços?</li>
+        <li>Precisa de área de login ou painel?</li>
+      </ul>
     </div>
+
+    <a class="btn-whatsapp" href="https://chat.whatsapp.com/F6dEP4KaqgiBqRSpe9F0xq" target="_blank">
+      Enviar para o vendedor
+    </a>
   </div>
 
-  <footer>© 2025 Personalize Web — Sites feitos do seu jeito.</footer>
+  <a class="chat-button" href="https://chat.whatsapp.com/F6dEP4KaqgiBqRSpe9F0xq" target="_blank">
+    Conversar com o vendedor
+  </a>
 
 </body>
 </html>
