@@ -1,134 +1,105 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
   <title>Personalize Web</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-color: #e0f0ff;
+      background-color: #e6f1f8;
       margin: 0;
+      padding: 0;
     }
+
     header {
-      background-color: #003366;
+      background-color: #001f3f;
       color: white;
-      padding: 15px;
+      padding: 20px;
       text-align: center;
-      font-size: 22px;
-      font-weight: bold;
+      font-size: 24px;
     }
-    .chat-container {
+
+    main {
       padding: 20px;
       max-width: 600px;
       margin: auto;
     }
-    .msg {
-      padding: 10px;
-      border-radius: 10px;
-      margin: 10px 0;
-      max-width: 80%;
-      word-wrap: break-word;
-      animation: fadeIn 0.5s ease;
+
+    .mensagem {
+      background-color: white;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
-    .msg.bot {
-      background-color: #ffffff;
+
+    .mensagem.bot {
       text-align: left;
+      border-left: 5px solid #001f3f;
     }
-    .msg.user {
-      background-color: #cce5ff;
-      margin-left: auto;
+
+    .mensagem.user {
       text-align: right;
+      border-right: 5px solid #0074D9;
     }
-    .typing {
-      font-style: italic;
-      opacity: 0.6;
-      animation: blink 1s steps(1, start) infinite;
-    }
-    .btn {
+
+    #botaoEnviar {
       display: block;
-      margin: 15px auto;
-      background-color: #28a745;
+      margin: 30px auto;
+      padding: 15px 25px;
+      background-color: #2ECC40;
       color: white;
       border: none;
-      padding: 15px 25px;
-      border-radius: 5px;
-      font-size: 16px;
+      font-size: 18px;
+      border-radius: 8px;
       cursor: pointer;
+      transition: all 0.2s ease-in-out;
     }
-    @keyframes blink {
-      50% { opacity: 1; }
-      100% { opacity: 0.6; }
+
+    #botaoEnviar:hover {
+      background-color: #27ae60;
+      transform: scale(1.05);
     }
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
+
+    footer {
+      background-color: #001f3f;
+      color: white;
+      text-align: center;
+      padding: 10px;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      font-size: 14px;
     }
   </style>
 </head>
 <body>
+  <header>
+    Personalize Web
+  </header>
 
-<header>Personalize Web - Criação de Sites</header>
+  <main>
+    <div class="mensagem bot">👋 Olá! Somos da Personalize Web. Criamos sites sob medida para o que você precisa.</div>
+    <div class="mensagem bot">💬 Como você gostaria que fosse seu site?</div>
+    <div class="mensagem user">Quero um site moderno, com fotos e que funcione no celular.</div>
+    <div class="mensagem bot">🎨 Quais cores você gostaria de usar no seu site?</div>
+    <div class="mensagem user">Azul escuro e branco.</div>
+    <div class="mensagem bot">🧠 Deseja que o site tenha comandos por voz? (Custo adicional de R$10)</div>
+    <div class="mensagem user">Sim, quero sim!</div>
+    <div class="mensagem bot">✅ Perfeito! Se quiser mudar algo ou acrescentar alguma coisa, digite aqui.</div>
+    <div class="mensagem bot">📤 Quando estiver pronto, aperte no botão abaixo para enviar ao vendedor.</div>
 
-<div class="chat-container" id="chat">
-  <div class="msg bot">⚠️ Apenas projetos dentro da lei serão aceitos.</div>
-</div>
+    <button id="botaoEnviar" onclick="enviarWhatsApp()">Enviar para o vendedor</button>
+  </main>
 
-<button class="btn" onclick="enviarWhatsApp()">Enviar para o vendedor</button>
+  <footer>
+    © 2025 Personalize Web — Sites feitos do seu jeito.
+  </footer>
 
-<script>
-  const mensagens = [
-    "Olá! Seja bem-vindo à Personalize Web.",
-    "Sou seu assistente virtual. Vamos criar o site do seu jeito!",
-    "Como você gostaria que o site fosse visualmente?",
-    "Quais funcionalidades você quer que ele tenha?",
-    "Você prefere alguma cor específica no seu site?",
-    "Deseja integração por voz? Isso terá um acréscimo de R$10,00.",
-    "Caso queira mudar algo ou acrescentar alguma coisa, digite aqui.",
-    "Aperte em Enviar para o vendedor."
-  ];
-
-  const chat = document.getElementById("chat");
-
-  function adicionarMensagem(texto, classe) {
-    const msg = document.createElement("div");
-    msg.className = "msg " + classe;
-    msg.innerText = texto;
-    chat.appendChild(msg);
-    chat.scrollTop = chat.scrollHeight;
-  }
-
-  function mostrarDigitando(callback) {
-    const typing = document.createElement("div");
-    typing.className = "msg bot typing";
-    typing.innerText = "digitando...";
-    chat.appendChild(typing);
-    chat.scrollTop = chat.scrollHeight;
-    setTimeout(() => {
-      chat.removeChild(typing);
-      callback();
-    }, 1500);
-  }
-
-  function iniciarChat(i = 0) {
-    if (i < mensagens.length) {
-      mostrarDigitando(() => {
-        adicionarMensagem(mensagens[i], "bot");
-        iniciarChat(i + 1);
-      });
+  <script>
+    function enviarWhatsApp() {
+      window.open("https://chat.whatsapp.com/F6dEP4KaqgiBqRSpe9F0xq", "_blank");
     }
-  }
-
-  function enviarWhatsApp() {
-    const numero = "5524999241876";
-    const mensagensEnviadas = [...document.querySelectorAll(".msg")].map(el => el.innerText).join("\n");
-    const link = `https://wa.me/${numero}?text=${encodeURIComponent(mensagensEnviadas)}`;
-    window.open(link, "_blank");
-  }
-
-  window.onload = () => {
-    iniciarChat();
-  };
-</script>
-
+  </script>
 </body>
 </html>
