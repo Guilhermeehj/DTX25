@@ -1,37 +1,27 @@
-<!DOCTYPE html><html lang="pt-BR">
+<!DOCTYPE html>
+<html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Personalize Web - Chat de Projeto</title>
+  <title>Chat com Envio para WhatsApp</title>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    /* Estilos básicos para o chat */
     body {
       font-family: Arial, sans-serif;
       background-color: #0d1b2a;
       color: #fff;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
+      margin: 0;
+      padding: 0;
     }
     .chat-container {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
+      max-width: 600px;
+      margin: 0 auto;
       padding: 20px;
-      overflow: hidden;
-    }
-    .chat {
-      flex: 1;
-      overflow-y: auto;
-      margin-bottom: 10px;
     }
     .message {
       margin: 10px 0;
       padding: 10px;
       border-radius: 10px;
       max-width: 70%;
-      line-height: 1.5;
     }
     .bot {
       background-color: #1b263b;
@@ -40,18 +30,11 @@
     .user {
       background-color: #415a77;
       align-self: flex-end;
-    }
-    .typing {
-      font-style: italic;
-      color: #ccc;
-      animation: blink 1s infinite;
-    }
-    @keyframes blink {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.5; }
+      margin-left: auto;
     }
     .input-container {
       display: flex;
+      margin-top: 20px;
     }
     input[type="text"] {
       flex: 1;
@@ -67,60 +50,72 @@
       padding: 10px 15px;
       cursor: pointer;
     }
+    .send-whatsapp {
+      margin-top: 20px;
+      background-color: #25D366;
+      color: white;
+      padding: 10px;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+    }
   </style>
 </head>
 <body>
   <div class="chat-container">
-    <div class="chat" id="chat">
-      <div class="message bot">Olá! 👋 Eu sou da <strong>Personalize Web</strong>. Me diga como posso ajudar a criar seu site dos sonhos?</div>
+    <div id="chat">
+      <!-- Mensagens serão adicionadas aqui -->
     </div>
-    <div class="typing" id="typing" style="display:none">Digitando...</div>
     <div class="input-container">
       <input type="text" id="input" placeholder="Digite sua mensagem..." />
       <button onclick="sendMessage()">Enviar</button>
     </div>
-  </div>  <script>
-    const perguntas = [
-      "Como você gostaria que o site fosse visualmente?",
-      "O que você deseja que o site faça?",
-      "Quais cores prefere no seu site?",
-      "Você quer integração por voz? (Adicional de R$10)",
-      "Tem alguma referência de site que você goste?",
-      "Qual é o público-alvo do seu site?",
-      "Deseja incluir redes sociais, WhatsApp ou botão de contato?"
-    ];
+    <button class="send-whatsapp" onclick="sendToWhatsApp()">Enviar para WhatsApp</button>
+  </div>
 
-    let perguntaIndex = 0;
+  <script>
+    const chat = document.getElementById('chat');
+    const input = document.getElementById('input');
+    let messages = [];
 
     function sendMessage() {
-      const input = document.getElementById('input');
-      const chat = document.getElementById('chat');
-      const typing = document.getElementById('typing');
-      const userMessage = input.value.trim();
-      if (!userMessage) return;
-
-      const userDiv = document.createElement('div');
-      userDiv.className = 'message user';
-      userDiv.textContent = userMessage;
-      chat.appendChild(userDiv);
+      const text = input.value.trim();
+      if (text === '') return;
+      messages.push({ sender: 'user', text });
+      displayMessage('user', text);
       input.value = '';
-
-      typing.style.display = 'block';
-      chat.scrollTop = chat.scrollHeight;
-
+      // Simular resposta do bot
       setTimeout(() => {
-        const botDiv = document.createElement('div');
-        botDiv.className = 'message bot';
-        if (perguntaIndex < perguntas.length) {
-          botDiv.innerHTML = perguntas[perguntaIndex];
-          perguntaIndex++;
-        } else {
-          botDiv.innerHTML = "Obrigado! Vamos iniciar o desenvolvimento com base nas suas respostas. Caso deseje integração por voz ou recursos adicionais, é só me avisar.";
-        }
-        chat.appendChild(botDiv);
-        typing.style.display = 'none';
-        chat.scrollTop = chat.scrollHeight;
-      }, 1500);
+        const botText = generateBotResponse(text);
+        messages.push({ sender: 'bot', text: botText });
+        displayMessage('bot', botText);
+      }, 1000);
     }
-  </script></body>
+
+    function displayMessage(sender, text) {
+      const messageDiv = document.createElement('div');
+      messageDiv.classList.add('message', sender);
+      messageDiv.textContent = text;
+      chat.appendChild(messageDiv);
+      chat.scrollTop = chat.scrollHeight;
+    }
+
+    function generateBotResponse(userText) {
+      // Aqui você pode implementar lógica para respostas automáticas
+      // Por simplicidade, retornaremos uma resposta genérica
+      return 'Entendi. Pode me dar mais detalhes?';
+    }
+
+    function sendToWhatsApp() {
+      const phoneNumber = '5524999241876'; // Seu número no formato internacional
+      let message = 'Resumo da conversa:%0A%0A';
+      messages.forEach(msg => {
+        const sender = msg.sender === 'user' ? 'Cliente' : 'Personalize Web';
+        message += `*${sender}:* ${msg.text}%0A`;
+      });
+      const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+      window.open(url, '_blank');
+    }
+  </script>
+</body>
 </html>
