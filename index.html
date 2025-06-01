@@ -1,38 +1,116 @@
-from transformers import AutoModelForCausalLM, AutoTokenizer
-import torch
-import gradio as gr
+<!DOCTYPE html><html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chat Estilo WhatsApp | Personalize Web</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #e5ddd5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .chat-container {
+      width: 100%;
+      max-width: 400px;
+      height: 600px;
+      background-color: #fff;
+      display: flex;
+      flex-direction: column;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      overflow: hidden;
+    }
+    .chat-header {
+      background-color: #075e54;
+      color: white;
+      padding: 15px;
+      font-size: 18px;
+    }
+    .chat-messages {
+      flex: 1;
+      padding: 10px;
+      overflow-y: auto;
+      background: #ece5dd;
+    }
+    .message {
+      max-width: 80%;
+      margin: 5px 0;
+      padding: 10px;
+      border-radius: 10px;
+      clear: both;
+    }
+    .sent {
+      background-color: #dcf8c6;
+      align-self: flex-end;
+      float: right;
+    }
+    .received {
+      background-color: #fff;
+      align-self: flex-start;
+      float: left;
+    }
+    .chat-input {
+      display: flex;
+      padding: 10px;
+      background-color: #f0f0f0;
+    }
+    .chat-input input {
+      flex: 1;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 20px;
+      outline: none;
+    }
+    .chat-input button {
+      background-color: #075e54;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      margin-left: 10px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="chat-container">
+    <div class="chat-header">
+      Personalize Web - Chat com Cliente
+    </div>
+    <div class="chat-messages" id="chatMessages">
+      <div class="message received">Olá! Como posso te ajudar hoje?</div>
+    </div>
+    <div class="chat-input">
+      <input type="text" id="userInput" placeholder="Digite sua mensagem..." />
+      <button onclick="sendMessage()">▶</button>
+    </div>
+  </div>  <script>
+    function sendMessage() {
+      const input = document.getElementById('userInput');
+      const msg = input.value.trim();
+      if (msg === '') return;
 
-# Carregando modelo e tokenizer
-model_name = "microsoft/DialoGPT-medium"
-tokenizer = AutoTokenizer.from_pretrained(model_name)
-model = AutoModelForCausalLM.from_pretrained(model_name)
+      const chatBox = document.getElementById('chatMessages');
+      const userMsg = document.createElement('div');
+      userMsg.className = 'message sent';
+      userMsg.innerText = msg;
 
-# Função de resposta
-def responder(mensagem, historico=[]):
-    nova_entrada = tokenizer.encode(mensagem + tokenizer.eos_token, return_tensors='pt')
-    
-    if historico:
-        historico_ids = torch.cat([tokenizer.encode(m + tokenizer.eos_token, return_tensors='pt') for m in historico], dim=-1)
-        entrada = torch.cat([historico_ids, nova_entrada], dim=-1)
-    else:
-        entrada = nova_entrada
+      chatBox.appendChild(userMsg);
+      input.value = '';
+      chatBox.scrollTop = chatBox.scrollHeight;
 
-    resposta_ids = model.generate(entrada, max_length=1000, pad_token_id=tokenizer.eos_token_id)
-    resposta = tokenizer.decode(resposta_ids[:, entrada.shape[-1]:][0], skip_special_tokens=True)
-
-    historico.append(mensagem)
-    historico.append(resposta)
-    return resposta, historico
-
-# Interface Gradio
-chatbot = gr.Interface(
-    fn=responder,
-    inputs=gr.inputs.Textbox(lines=2, placeholder="Digite sua pergunta..."),
-    outputs="text",
-    title="Chatbot IA Simples",
-    description="Um chatbot simples baseado no modelo DialoGPT.",
-    theme="compact"
-)
-
-if __name__ == "__main__":
-    chatbot.launch()
+      setTimeout(() => {
+        const botMsg = document.createElement('div');
+        botMsg.className = 'message received';
+        botMsg.innerText = 'Recebido! Em breve entraremos em contato.';
+        chatBox.appendChild(botMsg);
+        chatBox.scrollTop = chatBox.scrollHeight;
+      }, 1000);
+    }
+  </script></body>
+</html>
