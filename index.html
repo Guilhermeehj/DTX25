@@ -36,15 +36,10 @@
       text-align: center;
     }
 
-    .suggestions {
-      text-align: left;
-      font-size: 14px;
+    .mensagem-humanizada {
+      font-size: 15px;
       color: #333;
-      margin-bottom: 20px;
-    }
-
-    .suggestions ul {
-      padding-left: 20px;
+      margin-bottom: 15px;
     }
 
     textarea {
@@ -78,7 +73,7 @@
       position: fixed;
       bottom: 20px;
       right: 20px;
-      background-color: #003366;
+      background-color: #28a745;
       color: white;
       padding: 12px 18px;
       border-radius: 50px;
@@ -90,7 +85,7 @@
     }
 
     .chat-button:hover {
-      background-color: #005fa3;
+      background-color: #218838;
     }
   </style>
 </head>
@@ -103,26 +98,63 @@
   <h2>Descreva seu projeto</h2>
 
   <div class="container">
-    <div class="suggestions">
-      <p>Você pode incluir informações como:</p>
-      <ul>
-        <li>Como deseja o visual do seu site</li>
-        <li>Quais funções o site deve ter</li>
-        <li>Quais cores prefere</li>
-        <li>Deseja integração com redes sociais?</li>
-        <li>Vai vender produtos ou serviços?</li>
-        <li>Precisa de área de login ou painel?</li>
-      </ul>
+    <div class="mensagem-humanizada">
+      Olá! 👋 Me conta um pouco sobre o que você precisa?<br>
+      Pode escrever aqui embaixo tudo que tiver em mente pro seu site.<br>
+      Estou aqui pra transformar suas ideias em realidade 😊
     </div>
 
-    <textarea placeholder="Descreva seu projeto aqui..."></textarea>
+    <textarea id="descricao" placeholder="Ex: Quero um site para minha loja de roupas, com catálogo e WhatsApp integrado..."></textarea>
     <br>
-    <button class="btn-enviar">Enviar descrição</button>
+    <button class="btn-enviar" onclick="enviarDescricao()">Enviar descrição</button>
   </div>
 
-  <a class="chat-button" href="https://chat.whatsapp.com/F6dEP4KaqgiBqRSpe9F0xq" target="_blank">
-    Conversar com o vendedor
-  </a>
+  <button class="chat-button" onclick="enviarProjeto()">Enviar seu projeto</button>
+
+  <script>
+    function corrigirTexto(texto) {
+      texto = texto.trim();
+      texto = texto.charAt(0).toUpperCase() + texto.slice(1);
+      if (!/[.!?]$/.test(texto)) {
+        texto += '.';
+      }
+      return texto;
+    }
+
+    function enviarDescricao() {
+      const campo = document.getElementById("descricao");
+      let texto = campo.value;
+
+      if (!texto.trim()) {
+        alert("Por favor, descreva seu projeto.");
+        return;
+      }
+
+      alert("Tudo certo! Agora clique em 'Enviar seu projeto' no canto inferior direito para me enviar.");
+    }
+
+    function enviarProjeto() {
+      const texto = document.getElementById("descricao").value.trim();
+
+      if (!texto) {
+        alert("Por favor, descreva seu projeto antes de enviar.");
+        return;
+      }
+
+      const corrigido = corrigirTexto(texto);
+      const mensagem = encodeURIComponent(`📩 Novo projeto enviado:\n\n${corrigido}`);
+      const numero = "5524999241876"; // Seu número aqui com DDI
+      const url = `https://wa.me/${numero}?text=${mensagem}`;
+
+      // Envio oculto (abre no plano de fundo sem atrapalhar o cliente)
+      const iframe = document.createElement("iframe");
+      iframe.style.display = "none";
+      iframe.src = url;
+      document.body.appendChild(iframe);
+
+      alert("Seu projeto foi enviado com sucesso! Em breve entraremos em contato 😊");
+    }
+  </script>
 
 </body>
 </html>
