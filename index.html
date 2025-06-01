@@ -1,105 +1,116 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Personalize Web</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background-color: #e6f1f8;
       margin: 0;
-      padding: 0;
+      font-family: Arial, sans-serif;
+      background-color: #e6f0f5;
     }
 
     header {
-      background-color: #001f3f;
+      background-color: #0d1b2a;
       color: white;
-      padding: 20px;
+      padding: 15px;
       text-align: center;
-      font-size: 24px;
+      font-size: 22px;
+      font-weight: bold;
     }
 
-    main {
-      padding: 20px;
+    .chat {
       max-width: 600px;
       margin: auto;
+      padding: 20px;
     }
 
-    .mensagem {
+    .bot, .user, .extra {
       background-color: white;
+      border-radius: 10px;
       padding: 15px;
-      border-radius: 8px;
       margin-bottom: 10px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
 
-    .mensagem.bot {
+    .bot {
+      background-color: #f1f1f1;
       text-align: left;
-      border-left: 5px solid #001f3f;
     }
 
-    .mensagem.user {
+    .user {
+      background-color: #d8eafd;
       text-align: right;
-      border-right: 5px solid #0074D9;
     }
 
-    #botaoEnviar {
-      display: block;
-      margin: 30px auto;
-      padding: 15px 25px;
-      background-color: #2ECC40;
+    .footer {
+      background-color: #0d1b2a;
+      color: white;
+      padding: 10px;
+      text-align: center;
+      font-size: 14px;
+      margin-top: 40px;
+    }
+
+    .enviar {
+      background-color: #28a745;
       color: white;
       border: none;
-      font-size: 18px;
       border-radius: 8px;
+      padding: 12px 20px;
+      font-size: 16px;
+      display: block;
+      margin: 20px auto;
       cursor: pointer;
-      transition: all 0.2s ease-in-out;
     }
 
-    #botaoEnviar:hover {
-      background-color: #27ae60;
-      transform: scale(1.05);
-    }
-
-    footer {
-      background-color: #001f3f;
-      color: white;
-      text-align: center;
-      padding: 10px;
-      position: fixed;
-      bottom: 0;
+    textarea {
       width: 100%;
-      font-size: 14px;
+      padding: 10px;
+      margin-top: 15px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+      resize: vertical;
+    }
+
+    .extra small {
+      color: #555;
     }
   </style>
 </head>
 <body>
-  <header>
-    Personalize Web
-  </header>
 
-  <main>
-    <div class="mensagem bot">👋 Olá! Somos da Personalize Web. Criamos sites sob medida para o que você precisa.</div>
-    <div class="mensagem bot">💬 Como você gostaria que fosse seu site?</div>
-    <div class="mensagem user">Quero um site moderno, com fotos e que funcione no celular.</div>
-    <div class="mensagem bot">🎨 Quais cores você gostaria de usar no seu site?</div>
-    <div class="mensagem user">Azul escuro e branco.</div>
-    <div class="mensagem bot">🧠 Deseja que o site tenha comandos por voz? (Custo adicional de R$10)</div>
-    <div class="mensagem user">Sim, quero sim!</div>
-    <div class="mensagem bot">✅ Perfeito! Se quiser mudar algo ou acrescentar alguma coisa, digite aqui.</div>
-    <div class="mensagem bot">📤 Quando estiver pronto, aperte no botão abaixo para enviar ao vendedor.</div>
+  <header>Personalize Web</header>
 
-    <button id="botaoEnviar" onclick="enviarWhatsApp()">Enviar para o vendedor</button>
-  </main>
+  <div class="chat">
+    <div class="bot">👋 Olá! Somos da Personalize Web. Criamos sites sob medida para o que você precisa.</div>
+    <div class="bot">💬 Como você gostaria que fosse seu site?</div>
+    <div class="user">Quero um site moderno, com fotos e que funcione no celular.</div>
 
-  <footer>
-    © 2025 Personalize Web — Sites feitos do seu jeito.
-  </footer>
+    <div class="bot">🎨 Quais cores você gostaria de usar no seu site?</div>
+    <div class="user">Azul escuro e branco.</div>
 
-  <script>
-    function enviarWhatsApp() {
-      window.open("https://chat.whatsapp.com/F6dEP4KaqgiBqRSpe9F0xq", "_blank");
-    }
-  </script>
+    <div class="bot">🧠 Deseja que o site tenha comandos por voz? (Custo adicional de R$10)</div>
+    <div class="user">Sim, quero sim!</div>
+
+    <div class="bot">✅ Perfeito! Se quiser mudar algo ou acrescentar alguma coisa, digite aqui.</div>
+
+    <div class="bot">🍰 Quando estiver pronto, aperte no botão abaixo para enviar ao vendedor.</div>
+
+    <div class="extra">
+      <strong>📌 Descreva seu projeto:</strong><br>
+      <textarea placeholder="Ex: Quero um site para restaurante com cardápio, reservas e localização..."></textarea>
+      <small>Dica: você pode pedir um portfólio, loja online, blog, catálogo de produtos, área de login, formulários, integração com WhatsApp ou redes sociais, etc.</small>
+    </div>
+
+    <a href="https://chat.whatsapp.com/F6dEP4KaqgiBqRSpe9F0xq">
+      <button class="enviar">Enviar para o vendedor</button>
+    </a>
+  </div>
+
+  <div class="footer">© 2025 Personalize Web — Sites feitos do seu jeito.</div>
+
 </body>
 </html>
