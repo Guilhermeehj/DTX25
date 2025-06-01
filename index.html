@@ -45,6 +45,13 @@
       background-color: #a8dadc;
       align-self: flex-end;
     }
+    .typing {
+      align-self: flex-start;
+      font-style: italic;
+      font-size: 0.95rem;
+      color: #888;
+      padding: 5px 10px;
+    }
     .input-area {
       display: flex;
       padding: 1rem;
@@ -61,16 +68,18 @@
       resize: none;
     }
     button {
-      background-color: #2ecc71;
-      border: none;
       padding: 0.75rem 1.2rem;
       color: white;
       font-weight: bold;
       border-radius: 10px;
       cursor: pointer;
+      border: none;
     }
-    button.secondary {
+    .btn-chat {
       background-color: #3498db;
+    }
+    .btn-send {
+      background-color: #2ecc71;
     }
     footer {
       text-align: center;
@@ -93,8 +102,8 @@
   <div class="input-area">
     <textarea id="userInput" rows="1" placeholder="Escreva aqui..."></textarea>
     <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
-      <button onclick="sendMessage()">Enviar seu projeto</button>
-      <button class="secondary" onclick="talkToSite()">Falar com o site</button>
+      <button class="btn-chat" onclick="talkToSite()">Falar com o site</button>
+      <button class="btn-send" onclick="sendToWhatsApp()">Enviar seu projeto</button>
     </div>
   </div>
 
@@ -111,8 +120,9 @@
       "🚀 Aperte em 'Enviar seu projeto' para finalizar!"
     ];
     let perguntaAtual = 0;
+    let respostas = [];
 
-    function sendMessage() {
+    function talkToSite() {
       const input = document.getElementById('userInput');
       const chat = document.getElementById('chat');
       const text = input.value.trim();
@@ -123,32 +133,37 @@
       userMsg.innerText = text;
       chat.appendChild(userMsg);
 
-      const respostaCorrigida = text.charAt(0).toUpperCase() + text.slice(1).replace(/([^\.\!\?])$/, '$1.');
+      const corrigida = text.charAt(0).toUpperCase() + text.slice(1).replace(/([^\.\!\?])$/, '$1.');
+      respostas.push(corrigida);
 
       if (perguntaAtual < perguntas.length) {
+        const typingMsg = document.createElement('div');
+        typingMsg.className = 'typing';
+        typingMsg.id = 'typingMsg';
+        typingMsg.innerText = 'Digitando...';
+        chat.appendChild(typingMsg);
+        chat.scrollTop = chat.scrollHeight;
+
         setTimeout(() => {
+          typingMsg.remove();
           const botMsg = document.createElement('div');
           botMsg.className = 'msg bot';
           botMsg.innerText = perguntas[perguntaAtual++];
           chat.appendChild(botMsg);
           chat.scrollTop = chat.scrollHeight;
-        }, 800);
+        }, 1000);
       }
 
       input.value = '';
       chat.scrollTop = chat.scrollHeight;
-
-      // Envia para o WhatsApp (funcionalidade simulada)
-      fetch("https://api.whatsapp.com/send?phone=5524999241876&text=" + encodeURIComponent(respostaCorrigida));
     }
 
-    function talkToSite() {
-      const chat = document.getElementById('chat');
-      const botMsg = document.createElement('div');
-      botMsg.className = 'msg bot';
-      botMsg.innerText = "Você pode falar comigo por aqui mesmo! 😊 Me diga o que deseja.";
-      chat.appendChild(botMsg);
-      chat.scrollTop = chat.scrollHeight;
+    function sendToWhatsApp() {
+      if (respostas.length === 0) return alert("Converse com o site antes de enviar o projeto!");
+
+      const finalText = respostas.join("\n");
+      const url = "https://api.whatsapp.com/send?phone=5524999241876&text=" + encodeURIComponent(finalText);
+      window.open(url, "_blank");
     }
   </script>
 </body>
