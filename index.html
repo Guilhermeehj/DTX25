@@ -19,14 +19,6 @@
       flex-direction: column;
     }
 
-    .top-label {
-      text-align: center;
-      padding: 8px 16px;
-      font-size: 14px;
-      color: #333;
-      background-color: #f0f0f0;
-    }
-
     header {
       background-color: #0d1b2a;
       color: white;
@@ -92,33 +84,20 @@
 </head>
 <body>
 
-  <div class="top-label">📌 Descreva seu projeto:</div>
-
   <header>Personalize Web</header>
 
   <div class="content">
     <div class="card">
-      <textarea id="mensagem" placeholder="Ex: Quero um site para barbearia com agendamentos, fotos e mapa..."></textarea>
+      <strong>📌 Descreva seu projeto:</strong>
+      <textarea placeholder="Ex: Quero um site para barbearia com agendamentos, fotos e mapa..."></textarea>
       <small>Dica: Você pode pedir blog, portfólio, loja online, catálogo, integração com redes sociais, e muito mais!</small>
-      <button class="enviar" onclick="enviarMensagem()">Enviar para o vendedor</button>
+      <a href="https://chat.whatsapp.com/F6dEP4KaqgiBqRSpe9F0xq">
+        <button class="enviar">Enviar para o vendedor</button>
+      </a>
     </div>
   </div>
 
   <footer>© 2025 Personalize Web — Sites feitos do seu jeito.</footer>
-
-  <script>
-    function enviarMensagem() {
-      const texto = document.getElementById("mensagem").value.trim();
-      if (!texto) {
-        alert("Por favor, escreva sua ideia primeiro.");
-        return;
-      }
-
-      const msg = encodeURIComponent(texto);
-      const link = `https://api.whatsapp.com/send?text=${msg}`;
-      window.open(link, "_blank");
-    }
-  </script>
 
 </body>
 </html>
