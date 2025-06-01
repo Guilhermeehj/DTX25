@@ -1,116 +1,126 @@
 <!DOCTYPE html><html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Chat Estilo WhatsApp | Personalize Web</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Personalize Web - Chat de Projeto</title>
   <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
-      margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #dbe1ea;
+      font-family: Arial, sans-serif;
+      background-color: #0d1b2a;
+      color: #fff;
       height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
     .chat-container {
-      width: 100vw;
-      height: 100vh;
-      background-color: #f0f2f5;
-      display: flex;
-      flex-direction: column;
-    }
-    .chat-header {
-      background-color: #0b3d91;
-      color: white;
-      padding: 20px;
-      font-size: 20px;
-    }
-    .chat-messages {
       flex: 1;
-      padding: 20px;
-      overflow-y: auto;
-      background: #e9edf1;
       display: flex;
       flex-direction: column;
+      justify-content: space-between;
+      padding: 20px;
+      overflow: hidden;
+    }
+    .chat {
+      flex: 1;
+      overflow-y: auto;
+      margin-bottom: 10px;
     }
     .message {
+      margin: 10px 0;
+      padding: 10px;
+      border-radius: 10px;
       max-width: 70%;
-      margin: 5px 0;
-      padding: 12px;
-      border-radius: 12px;
-      line-height: 1.4;
+      line-height: 1.5;
     }
-    .sent {
-      background-color: #cce2ff;
-      align-self: flex-end;
-    }
-    .received {
-      background-color: #ffffff;
+    .bot {
+      background-color: #1b263b;
       align-self: flex-start;
     }
-    .chat-input {
+    .user {
+      background-color: #415a77;
+      align-self: flex-end;
+    }
+    .typing {
+      font-style: italic;
+      color: #ccc;
+      animation: blink 1s infinite;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+    .input-container {
       display: flex;
-      padding: 15px;
-      background-color: #f7f7f7;
-      border-top: 1px solid #ddd;
     }
-    .chat-input input {
+    input[type="text"] {
       flex: 1;
-      padding: 12px;
-      border: 1px solid #ccc;
-      border-radius: 20px;
+      padding: 10px;
+      border: none;
       outline: none;
+      font-size: 16px;
     }
-    .chat-input button {
-      background-color: #0b3d91;
+    button {
+      background-color: #1b263b;
       color: white;
       border: none;
-      border-radius: 50%;
-      width: 45px;
-      height: 45px;
-      margin-left: 10px;
+      padding: 10px 15px;
       cursor: pointer;
-      font-size: 16px;
     }
   </style>
 </head>
 <body>
   <div class="chat-container">
-    <div class="chat-header">
-      Personalize Web - Chat com Cliente
+    <div class="chat" id="chat">
+      <div class="message bot">Olá! 👋 Eu sou da <strong>Personalize Web</strong>. Me diga como posso ajudar a criar seu site dos sonhos?</div>
     </div>
-    <div class="chat-messages" id="chatMessages">
-      <div class="message received">Olá! Seja bem-vindo à Personalize Web 👋</div>
-      <div class="message received">Vamos montar seu aplicativo personalizado agora mesmo.</div>
-      <div class="message received">1️⃣ Qual o nome do aplicativo que você deseja?</div>
-      <div class="message received">2️⃣ Descreva o que o aplicativo deve fazer.</div>
-      <div class="message received">3️⃣ Quais cores você gostaria que fossem usadas?</div>
-      <div class="message received">4️⃣ Quer comandos por voz ativados?</div>
-    </div>
-    <div class="chat-input">
-      <input type="text" id="userInput" placeholder="Digite sua resposta aqui..." />
-      <button onclick="sendMessage()">▶</button>
+    <div class="typing" id="typing" style="display:none">Digitando...</div>
+    <div class="input-container">
+      <input type="text" id="input" placeholder="Digite sua mensagem..." />
+      <button onclick="sendMessage()">Enviar</button>
     </div>
   </div>  <script>
+    const perguntas = [
+      "Como você gostaria que o site fosse visualmente?",
+      "O que você deseja que o site faça?",
+      "Quais cores prefere no seu site?",
+      "Você quer integração por voz? (Adicional de R$10)",
+      "Tem alguma referência de site que você goste?",
+      "Qual é o público-alvo do seu site?",
+      "Deseja incluir redes sociais, WhatsApp ou botão de contato?"
+    ];
+
+    let perguntaIndex = 0;
+
     function sendMessage() {
-      const input = document.getElementById('userInput');
-      const msg = input.value.trim();
-      if (msg === '') return;
+      const input = document.getElementById('input');
+      const chat = document.getElementById('chat');
+      const typing = document.getElementById('typing');
+      const userMessage = input.value.trim();
+      if (!userMessage) return;
 
-      const chatBox = document.getElementById('chatMessages');
-      const userMsg = document.createElement('div');
-      userMsg.className = 'message sent';
-      userMsg.innerText = msg;
-
-      chatBox.appendChild(userMsg);
+      const userDiv = document.createElement('div');
+      userDiv.className = 'message user';
+      userDiv.textContent = userMessage;
+      chat.appendChild(userDiv);
       input.value = '';
-      chatBox.scrollTop = chatBox.scrollHeight;
+
+      typing.style.display = 'block';
+      chat.scrollTop = chat.scrollHeight;
 
       setTimeout(() => {
-        const botMsg = document.createElement('div');
-        botMsg.className = 'message received';
-        botMsg.innerText = 'Perfeito! Sua resposta foi registrada.';
-        chatBox.appendChild(botMsg);
-        chatBox.scrollTop = chatBox.scrollHeight;
-      }, 1000);
+        const botDiv = document.createElement('div');
+        botDiv.className = 'message bot';
+        if (perguntaIndex < perguntas.length) {
+          botDiv.innerHTML = perguntas[perguntaIndex];
+          perguntaIndex++;
+        } else {
+          botDiv.innerHTML = "Obrigado! Vamos iniciar o desenvolvimento com base nas suas respostas. Caso deseje integração por voz ou recursos adicionais, é só me avisar.";
+        }
+        chat.appendChild(botDiv);
+        typing.style.display = 'none';
+        chat.scrollTop = chat.scrollHeight;
+      }, 1500);
     }
   </script></body>
 </html>
