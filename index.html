@@ -19,6 +19,14 @@
       flex-direction: column;
     }
 
+    .top-label {
+      text-align: center;
+      padding: 8px 16px;
+      font-size: 14px;
+      color: #333;
+      background-color: #f0f0f0;
+    }
+
     header {
       background-color: #0d1b2a;
       color: white;
@@ -84,11 +92,12 @@
 </head>
 <body>
 
+  <div class="top-label">📌 Descreva seu projeto:</div>
+
   <header>Personalize Web</header>
 
   <div class="content">
     <div class="card">
-      <strong>📌 Descreva seu projeto:</strong>
       <textarea id="mensagem" placeholder="Ex: Quero um site para barbearia com agendamentos, fotos e mapa..."></textarea>
       <small>Dica: Você pode pedir blog, portfólio, loja online, catálogo, integração com redes sociais, e muito mais!</small>
       <button class="enviar" onclick="enviarMensagem()">Enviar para o vendedor</button>
@@ -106,7 +115,7 @@
       }
 
       const msg = encodeURIComponent(texto);
-      const link = `https://api.whatsapp.com/send?text=${msg}&phone=&app_absent=0`;
+      const link = `https://api.whatsapp.com/send?text=${msg}`;
       window.open(link, "_blank");
     }
   </script>
