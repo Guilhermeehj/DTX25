@@ -1,121 +1,179 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <title>Chat com Envio para WhatsApp</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Personalize Web - Chat</title>
   <style>
-    /* Estilos básicos para o chat */
     body {
-      font-family: Arial, sans-serif;
-      background-color: #0d1b2a;
-      color: #fff;
       margin: 0;
-      padding: 0;
+      background-color: #d0e7ff;
+      font-family: 'Segoe UI', sans-serif;
     }
+
+    header {
+      background-color: #001f3f;
+      color: white;
+      padding: 15px;
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+
     .chat-container {
       max-width: 600px;
-      margin: 0 auto;
+      margin: 80px auto 20px;
+      background-color: white;
+      border-radius: 10px;
       padding: 20px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
+
     .message {
       margin: 10px 0;
-      padding: 10px;
-      border-radius: 10px;
-      max-width: 70%;
+      padding: 12px 15px;
+      border-radius: 20px;
+      max-width: 80%;
+      line-height: 1.4;
     }
+
     .bot {
-      background-color: #1b263b;
-      align-self: flex-start;
+      background-color: #e1f0ff;
+      text-align: left;
     }
+
     .user {
-      background-color: #415a77;
-      align-self: flex-end;
+      background-color: #c8ffc8;
+      text-align: right;
       margin-left: auto;
     }
-    .input-container {
-      display: flex;
-      margin-top: 20px;
+
+    .typing {
+      font-style: italic;
+      color: gray;
+      animation: blink 1s infinite;
     }
-    input[type="text"] {
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    #inputContainer {
+      display: flex;
+      margin-top: 15px;
+    }
+
+    input {
       flex: 1;
       padding: 10px;
-      border: none;
-      outline: none;
-      font-size: 16px;
+      border-radius: 20px;
+      border: 1px solid #ccc;
     }
+
     button {
-      background-color: #1b263b;
-      color: white;
-      border: none;
       padding: 10px 15px;
+      margin-left: 10px;
+      border: none;
+      border-radius: 20px;
+      background-color: #28a745;
+      color: white;
+      font-weight: bold;
       cursor: pointer;
     }
-    .send-whatsapp {
+
+    #sendBtn {
+      background-color: #28a745;
+    }
+
+    #whatsappBtn {
+      width: 100%;
       margin-top: 20px;
-      background-color: #25D366;
+      background-color: #28a745;
       color: white;
-      padding: 10px;
+      font-weight: bold;
+      padding: 12px;
+      border-radius: 25px;
       border: none;
+      font-size: 16px;
       cursor: pointer;
-      border-radius: 5px;
     }
   </style>
 </head>
 <body>
+  <header>Personalize Web</header>
+  <div class="chat-container" id="chatBox">
+    <div class="message bot">👋 Olá! Bem-vindo à Personalize Web. Criamos sites personalizados de acordo com o que você deseja! Só fazemos projetos legais e dentro da lei.</div>
+    <div class="message bot">💡 Como você gostaria que fosse o seu site?</div>
+  </div>
+
   <div class="chat-container">
-    <div id="chat">
-      <!-- Mensagens serão adicionadas aqui -->
+    <div id="inputContainer">
+      <input type="text" id="userInput" placeholder="Digite sua resposta aqui..." />
+      <button id="sendBtn">Enviar</button>
     </div>
-    <div class="input-container">
-      <input type="text" id="input" placeholder="Digite sua mensagem..." />
-      <button onclick="sendMessage()">Enviar</button>
-    </div>
-    <button class="send-whatsapp" onclick="sendToWhatsApp()">Enviar para WhatsApp</button>
+    <button id="whatsappBtn">📲 Enviar para o Vendedor</button>
   </div>
 
   <script>
-    const chat = document.getElementById('chat');
-    const input = document.getElementById('input');
-    let messages = [];
+    const chatBox = document.getElementById('chatBox');
+    const userInput = document.getElementById('userInput');
+    const sendBtn = document.getElementById('sendBtn');
+    const whatsappBtn = document.getElementById('whatsappBtn');
 
-    function sendMessage() {
-      const text = input.value.trim();
-      if (text === '') return;
-      messages.push({ sender: 'user', text });
-      displayMessage('user', text);
-      input.value = '';
-      // Simular resposta do bot
+    const perguntas = [
+      "🎨 Quais cores você gostaria no site?",
+      "⚙️ O que você quer que o site faça?",
+      "📱 Deseja que o site funcione também no celular?",
+      "🧠 Deseja integração por voz? (+R$10)",
+      "✅ Deseja um dos nossos modelos prontos ou algo 100% personalizado?"
+    ];
+
+    let respostas = [];
+    let perguntaIndex = 0;
+
+    function adicionarMensagem(texto, classe) {
+      const msg = document.createElement('div');
+      msg.className = `message ${classe}`;
+      msg.textContent = texto;
+      chatBox.appendChild(msg);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    function mostrarDigitando(callback) {
+      const typing = document.createElement('div');
+      typing.className = 'message bot typing';
+      typing.textContent = "Digitando...";
+      chatBox.appendChild(typing);
+      chatBox.scrollTop = chatBox.scrollHeight;
+
       setTimeout(() => {
-        const botText = generateBotResponse(text);
-        messages.push({ sender: 'bot', text: botText });
-        displayMessage('bot', botText);
-      }, 1000);
+        chatBox.removeChild(typing);
+        callback();
+      }, 1500);
     }
 
-    function displayMessage(sender, text) {
-      const messageDiv = document.createElement('div');
-      messageDiv.classList.add('message', sender);
-      messageDiv.textContent = text;
-      chat.appendChild(messageDiv);
-      chat.scrollTop = chat.scrollHeight;
-    }
+    sendBtn.onclick = () => {
+      const texto = userInput.value.trim();
+      if (!texto) return;
+      adicionarMensagem(texto, 'user');
+      respostas.push(texto);
+      userInput.value = '';
+      if (perguntaIndex < perguntas.length) {
+        mostrarDigitando(() => {
+          adicionarMensagem(perguntas[perguntaIndex], 'bot');
+          perguntaIndex++;
+        });
+      }
+    };
 
-    function generateBotResponse(userText) {
-      // Aqui você pode implementar lógica para respostas automáticas
-      // Por simplicidade, retornaremos uma resposta genérica
-      return 'Entendi. Pode me dar mais detalhes?';
-    }
-
-    function sendToWhatsApp() {
-      const phoneNumber = '5524999241876'; // Seu número no formato internacional
-      let message = 'Resumo da conversa:%0A%0A';
-      messages.forEach(msg => {
-        const sender = msg.sender === 'user' ? 'Cliente' : 'Personalize Web';
-        message += `*${sender}:* ${msg.text}%0A`;
-      });
-      const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-      window.open(url, '_blank');
-    }
+    whatsappBtn.onclick = () => {
+      const mensagem = respostas.map((r, i) => `Resposta ${i+1}: ${r}`).join('\n');
+      const phone = "5524999241876";
+      const url = `https://wa.me/${phone}?text=${encodeURIComponent("Olá! Aqui estão as respostas do meu projeto:\n" + mensagem)}`;
+      window.open(url, "_blank");
+    };
   </script>
 </body>
 </html>
