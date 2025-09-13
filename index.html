@@ -2,192 +2,114 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Personalize Web - Atendimento</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Meu Site no GitHub Pages</title>
   <style>
     body {
-      background-color: #f0f0f0; /* fundo cinza claro */
-      font-family: 'Arial', sans-serif;
       margin: 0;
-      padding: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background-color: #f5f5f5;
       color: #333;
     }
-
     header {
-      background-color: #222;
-      padding: 1rem;
+      background-color: #2c3e50;
+      color: white;
+      padding: 20px;
       text-align: center;
-      font-size: 1.5rem;
-      font-weight: bold;
-      color: #00bcd4;
     }
-
-    main {
-      max-width: 600px;
-      margin: auto;
-      padding: 1rem;
-    }
-
-    .chat-box {
-      background-color: #fff;
-      padding: 1rem;
-      border-radius: 10px;
-      height: 400px;
-      overflow-y: auto;
-      margin-bottom: 1rem;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-
-    .msg {
-      margin: 10px 0;
-      padding: 10px;
-      border-radius: 10px;
-      max-width: 80%;
-    }
-
-    .ia {
-      background-color: #e6f2ff;
-      align-self: flex-start;
-    }
-
-    .user {
-      background-color: #cce5ff;
-      align-self: flex-end;
-      text-align: right;
-      margin-left: auto;
-    }
-
-    .msg.typing {
-      font-style: italic;
-      color: #888;
-    }
-
-    .input-area {
+    nav {
+      background: #34495e;
       display: flex;
-      gap: 10px;
+      justify-content: center;
+      gap: 15px;
+      padding: 10px 0;
     }
-
-    input {
-      flex: 1;
-      padding: 10px;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-    }
-
-    button {
-      padding: 10px 15px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
+    nav a {
+      color: white;
+      text-decoration: none;
       font-weight: bold;
     }
-
-    #sendBtn {
-      background-color: #007bff;
-      color: #fff;
+    nav a:hover {
+      text-decoration: underline;
     }
-
-    #whatsappBtn {
-      background-color: #4CAF50;
-      color: #fff;
+    main {
+      padding: 20px;
+      max-width: 900px;
+      margin: auto;
     }
-
+    h1, h2 {
+      color: #2c3e50;
+    }
+    section {
+      margin-bottom: 40px;
+    }
+    .card {
+      background: white;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+    }
     footer {
-      margin-top: 1rem;
-      font-size: 0.9rem;
+      background: #2c3e50;
+      color: white;
       text-align: center;
-      color: #555;
+      padding: 15px;
+      margin-top: 40px;
+    }
+    img {
+      max-width: 100%;
+      border-radius: 6px;
     }
   </style>
 </head>
 <body>
+  <header>
+    <h1>Bem-vindo ao meu site</h1>
+    <p>Este é um exemplo rodando pelo GitHub Pages</p>
+  </header>
 
-  <header>Personalize Web</header>
+  <nav>
+    <a href="#sobre">Sobre</a>
+    <a href="#servicos">Serviços</a>
+    <a href="#contato">Contato</a>
+  </nav>
 
   <main>
-    <div class="chat-box" id="chatBox">
-      <div class="msg ia">Olá! Tudo bem? 👋<br>Estou aqui para te ajudar a criar o site perfeito.</div>
-      <div class="msg ia">Como você gostaria que o seu site fosse?</div>
-    </div>
+    <section id="sobre">
+      <div class="card">
+        <h2>Sobre</h2>
+        <p>
+          Este site foi criado como demonstração de como publicar um
+          <code>index.html</code> no GitHub Pages. Aqui você pode adicionar textos, imagens,
+          cores, títulos e muito mais.
+        </p>
+        <img src="https://picsum.photos/800/300" alt="Imagem ilustrativa">
+      </div>
+    </section>
 
-    <div class="input-area">
-      <input type="text" id="inputMsg" placeholder="Digite aqui sua resposta..." />
-      <button id="sendBtn">✓</button>
-      <button id="whatsappBtn">Enviar seu projeto</button>
-    </div>
+    <section id="servicos">
+      <div class="card">
+        <h2>Serviços</h2>
+        <ul>
+          <li>Criação de sites</li>
+          <li>Design responsivo</li>
+          <li>Publicação no GitHub Pages</li>
+        </ul>
+      </div>
+    </section>
 
-    <footer><strong>Não perca tempo:</strong> faça suas ideias se tornarem realidade.</footer>
+    <section id="contato">
+      <div class="card">
+        <h2>Contato</h2>
+        <p>Você pode entrar em contato comigo através do e-mail:</p>
+        <p><strong>exemplo@email.com</strong></p>
+      </div>
+    </section>
   </main>
 
-  <script>
-    const perguntas = [
-      "Como você gostaria que o seu site fosse?",
-      "Qual função principal você deseja que o site tenha?",
-      "Que cores você quer usar no seu site?",
-      "Deseja integração com voz (acréscimo de R$10)?",
-      "Tem algum exemplo de site que você goste?",
-      "Mais algum detalhe importante que eu deva saber?"
-    ];
-
-    let perguntaAtual = 0;
-
-    const chatBox = document.getElementById('chatBox');
-    const inputMsg = document.getElementById('inputMsg');
-    const sendBtn = document.getElementById('sendBtn');
-    const whatsappBtn = document.getElementById('whatsappBtn');
-
-    function addMensagem(texto, classe) {
-      const div = document.createElement('div');
-      div.className = `msg ${classe}`;
-      div.innerText = texto;
-      chatBox.appendChild(div);
-      chatBox.scrollTop = chatBox.scrollHeight;
-    }
-
-    function addDigitando(callback) {
-      const typing = document.createElement('div');
-      typing.className = 'msg ia typing';
-      typing.innerText = 'Digitando...';
-      chatBox.appendChild(typing);
-      chatBox.scrollTop = chatBox.scrollHeight;
-
-      setTimeout(() => {
-        chatBox.removeChild(typing);
-        callback();
-      }, 1500);
-    }
-
-    function responderCliente() {
-      const texto = inputMsg.value.trim();
-      if (!texto) return;
-
-      addMensagem(texto, 'user');
-      inputMsg.value = "";
-
-      if (perguntaAtual < perguntas.length - 1) {
-        perguntaAtual++;
-        addDigitando(() => {
-          addMensagem(perguntas[perguntaAtual], 'ia');
-        });
-      } else {
-        addDigitando(() => {
-          addMensagem("Caso queira mudar algo ou acrescentar, digite aqui.", "ia");
-          addMensagem("Aperte em Enviar seu projeto ✅", "ia");
-        });
-      }
-    }
-
-    sendBtn.addEventListener('click', responderCliente);
-
-    inputMsg.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') responderCliente();
-    });
-
-    whatsappBtn.addEventListener('click', () => {
-      let msgs = [...chatBox.querySelectorAll('.user')].map(m => m.innerText).join('%0A');
-      window.open(`https://chat.whatsapp.com/F6dEP4KaqgiBqRSpe9F0xq?text=${msgs}`, '_blank');
-    });
-  </script>
-
+  <footer>
+    <p>© 2025 - Meu Site no GitHub Pages</p>
+  </footer>
 </body>
 </html>
